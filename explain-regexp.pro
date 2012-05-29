@@ -16,8 +16,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    node.cpp
+    node.cpp \
+    variant.cpp \
+    nodepattern.cpp \
+    patterncontainer.cpp
 
 HEADERS += \
     nodeType.h \
-    node.h
+    node.h \
+    variant.h \
+    nodepattern.h \
+    patterncontainer.h
