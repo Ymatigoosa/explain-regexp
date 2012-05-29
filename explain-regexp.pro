@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core
-
+QT	 += testlib
 QT       -= gui
 
 TARGET = explain-regexp
@@ -19,11 +19,13 @@ SOURCES += main.cpp \
     node.cpp \
     variant.cpp \
     nodepattern.cpp \
-    patterncontainer.cpp
+    patterncontainer.cpp \
+    test_description.cpp
 
 HEADERS += \
     nodeType.h \
     node.h \
     variant.h \
     nodepattern.h \
-    patterncontainer.h
+    patterncontainer.h \
+    test_description.h
