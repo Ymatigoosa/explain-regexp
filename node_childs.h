@@ -66,8 +66,8 @@
  = 0x80000000000000,
  = 0x100000000000000,
  = 0x200000000000000,
-operand_t = 0x400000000000000,
-operand_8 = 0x800000000000000,
+ = 0x400000000000000,
+ = 0x800000000000000,
 operand_16 = 0x1000000000000000,
 empty = 0x2000000000000000,
 text = 0x4000000000000000*/
@@ -1312,4 +1312,47 @@ public:
 
 	bool hasArg(QString & arg)
 	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \t
+ * Класс для определения узла типа \t
+ */
+class node_operand_t :	public node
+{
+public:
+
+	node_operand_t()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("ot");	}
+
+	nodeType type()///<тип 
+	{	return operand_t;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \ddd
+ * Класс для определения узла типа \ddd
+ */
+class node_operand_8 :	public node
+{
+public:
+	QString n;
+
+	node_operand_8()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("o8");	}
+
+	nodeType type()///<тип 
+	{	return operand_8;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("n")) ? true : false;	}
 };
