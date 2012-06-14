@@ -45,7 +45,7 @@
  = 0x400000000,
  = 0x800000000,
  = 0x1000000000,
-assert_cap = 0x2000000000,
+ = 0x2000000000,
 assert_b = 0x4000000000,
 assert_b_big = 0x8000000000,
 assert_a_big = 0x10000000000,
@@ -850,6 +850,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return assert_d;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: ^
+ * Класс для определения узла типа ^
+ */
+class node_assert_cap :	public node
+{
+public:
+
+	node_assert_cap()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("ac");	}
+
+	nodeType type()///<тип 
+	{	return assert_cap;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
