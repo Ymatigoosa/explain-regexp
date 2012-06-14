@@ -23,7 +23,7 @@
  = 0x1000,
  = 0x2000,
  = 0x4000,
-quantifier_m_question = 0x8000,
+ = 0x8000,
 quantifier_0n_question = 0x10000,
 quantifier_m0_question = 0x20000,
 quantifier_star_question = 0x40000,
@@ -388,4 +388,26 @@ public:
 
 	bool hasArg(QString & arg)
 	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
+};
+
+/*!
+ * \brief Узел: {m}?
+ * Класс для определения узла типа {m}?
+ */
+class node_quantifier_m_question :	public node
+{
+public:
+	QString m;
+
+	node_quantifier_m_question()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("kmq");	}
+
+	nodeType type()///<тип 
+	{	return quantifier_m_question;	}
+
+	bool hasArg(QString & arg)
+	{	return ( arg==QString("m") ) ? true : false;	}
 };
