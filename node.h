@@ -50,7 +50,7 @@ public:
 	 * Выбирает наиболее подходящий шаблон для узла из структуры nodePattern
 	 * \param[in]	_nodePattern	список шаблонов узла с условиями применения
 	 * \param[in]	parent		ссылка на родителя для проверки условий
-	 * \param[in,out]	form	требуемая форма (пустая строка – стандартная форма)
+	 * \param[in]	form	требуемая форма (пустая строка – стандартная форма)
 	 * \return строка-описание
 	 */
 	QString pattern(const nodePattern & _nodePattern, node * parent=0, QString form = QString());

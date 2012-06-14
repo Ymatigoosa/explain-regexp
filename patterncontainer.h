@@ -5,6 +5,7 @@
 #include "nodepattern.h"
 
 /*!
+ * \brief Класс, содержащий список всех шаблонов
  * Класс, содержащий список всех шаблонов с возможность получения набора шаблонов для определенного тега
  */
 class patternContainer
@@ -35,7 +36,6 @@ public:
 	 * \return ссылка на список шаблонов из контейнера nodePatterns
 	 */
 	nodePattern * getPatternFromType(nodeType type);
-
 };
 
 #endif // PATTERNCONTAINER_H
