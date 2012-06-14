@@ -15,7 +15,7 @@
  = 0x10,
  = 0x20,
  = 0x40,
-quantifier_mn_plus = 0x80,
+ = 0x80,
 quantifier_m_plus = 0x100,
 quantifier_0n_plus = 0x200,
 quantifier_m0_plus = 0x400,
@@ -240,3 +240,26 @@ public:
 	}
 };
 
+/*!
+ * \brief Узел: {m,n}+
+ * Класс для определения узла типа {m,n}+
+ */
+class node_quantifier_mn_plus :	public node
+{
+public:
+	node_quantifier_mn_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kmnp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_mn_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("m") || arg==QString("n") ) ? true : false;
+	}
+};
