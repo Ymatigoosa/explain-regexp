@@ -1156,3 +1156,30 @@ public:
 	void buildChildsFromText(QString &text);
 };
 
+/*!
+ * \brief ”зел: [^symb]
+ *  ласс дл€ определени€ узла типа [^symb]
+ */
+class node_symbol_class_negative :	public node
+{
+public:
+	QString text;
+
+	node_symbol_class_negative()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("scn");	}
+
+	nodeType type()///<тип 
+	{	return symbol_class_negative;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text")) ? true : false;	}
+
+	/*!
+	 * –азбирает текст аргумента text и на основе содержимого порождает потомков
+	 * \param[in] text аргумент text тега sc
+	 */
+	void buildChildsFromText(QString &text);
+};
