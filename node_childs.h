@@ -36,7 +36,7 @@
  = 0x2000000,
  = 0x4000000,
  = 0x8000000,
-modifier_i = 0x10000000,
+ = 0x10000000,
 modifier_s = 0x20000000,
 modifier_u = 0x40000000,
 modifier_m = 0x80000000,
@@ -745,6 +745,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return condition_back_negative;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?i)
+ * Класс для определения узла типа (?i)
+ */
+class node_modifier_i :	public node
+{
+public:
+
+	node_modifier_i()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("mi");	}
+
+	nodeType type()///<тип 
+	{	return modifier_i;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
