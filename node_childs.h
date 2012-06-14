@@ -31,7 +31,7 @@
  = 0x100000,
  = 0x200000,
  = 0x400000,
-group = 0x800000,
+ = 0x800000,
 group_question = 0x1000000,
 group_once = 0x2000000,
 condition_mask = 0x4000000,
@@ -561,6 +561,28 @@ public:
 
 	nodeType type()///<тип 
 	{	return oor;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: ( )
+ * Класс для определения узла типа ( )
+ */
+class node_group :	public node
+{
+public:
+	QString m;
+
+	node_group()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("g");	}
+
+	nodeType type()///<тип 
+	{	return group;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
