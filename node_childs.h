@@ -11,10 +11,10 @@
 = 0x1,
  = 0x2,
  = 0x4,
-quantifier_m0 = 0x8,
-quantifier_star = 0x10,
-quantifier_plus = 0x20,
-quantifier_question = 0x40,
+ = 0x8,
+ = 0x10,
+ = 0x20,
+ = 0x40,
 quantifier_mn_plus = 0x80,
 quantifier_m_plus = 0x100,
 quantifier_0n_plus = 0x200,
@@ -144,3 +144,26 @@ public:
 	}
 };
 
+/*!
+ * \brief Узел: {m,}
+ * Класс для определения узла типа {m,}
+ */
+class node_quantifier_m0 :	public node
+{
+public:
+	node_quantifier_m0()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kmx");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_m0;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("m") ) ? true : false;
+	}
+};
