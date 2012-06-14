@@ -288,4 +288,26 @@ public:
 	}
 };
 
-
+/*!
+ * \brief Узел: {,n}+
+ * Класс для определения узла типа {,n}+
+ */
+class node_quantifier_0n_plus :	public node
+{
+public:
+	node_quantifier_0n_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kxnp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_0n_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("n") ) ? true : false;
+	}
+};
