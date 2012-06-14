@@ -1,5 +1,7 @@
 #ifndef VARIANT_H
 #define VARIANT_H
+#include <QList>
+#include <QString>
 
 /*!
  * \brief Класс, содержащий альтернативный вариант шаблона и условие его применения

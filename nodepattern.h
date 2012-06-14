@@ -1,5 +1,6 @@
 #ifndef NODEPATTERN_H
 #define NODEPATTERN_H
+#include "variant.h"
 
 /*!
  * \brief список шаблонов для определенного узла

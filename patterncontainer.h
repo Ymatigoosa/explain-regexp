@@ -3,7 +3,8 @@
 #include "variant.h"
 #include "nodeType.h"
 #include "nodepattern.h"
-
+#include <QStringList>
+#include <QMap>
 /*!
  * \brief Класс, содержащий список всех шаблонов
  * Класс, содержащий список всех шаблонов с возможность получения набора шаблонов для определенного тега
