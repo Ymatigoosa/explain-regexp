@@ -64,7 +64,7 @@
  = 0x20000000000000,
  = 0x40000000000000,
  = 0x80000000000000,
-operand_e = 0x100000000000000,
+ = 0x100000000000000,
 operand_n = 0x200000000000000,
 operand_t = 0x400000000000000,
 operand_8 = 0x800000000000000,
@@ -1267,6 +1267,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return operand_a;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \е
+ * Класс для определения узла типа \е
+ */
+class node_operand_e :	public node
+{
+public:
+
+	node_operand_e()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("oe");	}
+
+	nodeType type()///<тип 
+	{	return operand_e;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
