@@ -18,8 +18,8 @@
  = 0x80,
  = 0x100,
  = 0x200,
-quantifier_m0_plus = 0x400,
-quantifier_star_plus = 0x800,
+ = 0x400,
+ = 0x800,
 quantifier_plus_plus = 0x1000,
 quantifier_question_plus = 0x2000,
 quantifier_mn_question = 0x4000,
@@ -342,7 +342,7 @@ public:
 	}
 	QString tagName()///<название тега
 	{
-		return QString("kxnp");
+		return QString("kmxp");
 	}
 	nodeType type()///<тип 
 	{
@@ -351,5 +351,29 @@ public:
 	bool hasArg(QString & arg)
 	{
 		return ( arg==QString("m") ) ? true : false;
+	}
+};
+
+/*!
+ * \brief ”зел: *+
+ *  ласс дл€ определени€ узла типа *+
+ */
+class node_quantifier_star_plus :	public node
+{
+public:
+	node_quantifier_star_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("ksp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_star_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return false;
 	}
 };
