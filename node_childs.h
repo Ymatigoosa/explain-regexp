@@ -38,7 +38,7 @@
  = 0x8000000,
  = 0x10000000,
  = 0x20000000,
-modifier_u = 0x40000000,
+ = 0x40000000,
 modifier_m = 0x80000000,
  = 0x100000000,
  = 0x200000000,
@@ -787,6 +787,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return modifier_s;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?U)
+ * Класс для определения узла типа (?U)
+ */
+class node_modifier_u :	public node
+{
+public:
+
+	node_modifier_u()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("mu");	}
+
+	nodeType type()///<тип 
+	{	return modifier_u;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
