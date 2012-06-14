@@ -62,6 +62,13 @@ public:
 	 * \return	true если шаблон подходит
 	 */
 	bool check(const variant & pattern, node * parent = 0);
+
+	/*!
+	 * добавляет ребенка к вершине дерева
+	 * \param[in] указатель адрес ребенка
+	 * \return номер ребенка
+	 */
+	int addChild(const node * child);
 };
 
 #endif // NODE_H
