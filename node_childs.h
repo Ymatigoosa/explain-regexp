@@ -57,7 +57,7 @@
  = 0x400000000000,
  = 0x800000000000,
  = 0x1000000000000,
-dot = 0x2000000000000,
+ = 0x2000000000000,
 symbol_class = 0x4000000000000,
 symbol_class_negative = 0x8000000000000,
 range = 0x10000000000000,
@@ -1102,6 +1102,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return operand_w_big;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: .
+ * Класс для определения узла типа .
+ */
+class node_dot :	public node
+{
+public:
+
+	node_dot()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("dot");	}
+
+	nodeType type()///<тип 
+	{	return dot;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
