@@ -51,8 +51,8 @@
  = 0x10000000000,
  = 0x20000000000,
  = 0x40000000000,
-operand_d = 0x80000000000,
-operand_d_big = 0x100000000000,
+ = 0x80000000000,
+ = 0x100000000000,
 operand_s = 0x200000000000,
 operand_s_big = 0x400000000000,
 operand_w = 0x800000000000,
@@ -976,6 +976,48 @@ public:
 
 	nodeType type()///<тип 
 	{	return assert_z;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \d
+ * Класс для определения узла типа \d
+ */
+class node_operand_d :	public node
+{
+public:
+
+	node_operand_d()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("od");	}
+
+	nodeType type()///<тип 
+	{	return operand_d;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \D
+ * Класс для определения узла типа \D
+ */
+class node_operand_d_big :	public node
+{
+public:
+
+	node_operand_d_big()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("odb");	}
+
+	nodeType type()///<тип 
+	{	return operand_d_big;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
