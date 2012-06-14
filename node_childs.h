@@ -1229,3 +1229,24 @@ public:
 	{	return (arg==QString("text") ) ? true : false;	}
 };
 
+/*!
+ * \brief Узел: \n (1 до 99)
+ * Класс для определения узла типа \n (1 до 99)
+ */
+class node_link :	public node
+{
+public:
+	QString n;
+
+	node_link()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("link");	}
+
+	nodeType type()///<тип 
+	{	return link;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("n") ) ? true : false;	}
+};
