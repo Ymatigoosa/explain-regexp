@@ -16,8 +16,8 @@
  = 0x20,
  = 0x40,
  = 0x80,
-quantifier_m_plus = 0x100,
-quantifier_0n_plus = 0x200,
+ = 0x100,
+ = 0x200,
 quantifier_m0_plus = 0x400,
 quantifier_star_plus = 0x800,
 quantifier_plus_plus = 0x1000,
@@ -263,3 +263,29 @@ public:
 		return ( arg==QString("m") || arg==QString("n") ) ? true : false;
 	}
 };
+
+/*!
+ * \brief Узел: {m}+
+ * Класс для определения узла типа {m}+
+ */
+class node_quantifier_m_plus :	public node
+{
+public:
+	node_quantifier_m_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kmp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_m_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("m") ) ? true : false;
+	}
+};
+
+
