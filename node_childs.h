@@ -29,7 +29,7 @@
  = 0x40000,
  = 0x80000,
  = 0x100000,
-concatenation = 0x200000,
+ = 0x200000,
 oor = 0x400000,
 group = 0x800000,
 group_question = 0x1000000,
@@ -517,6 +517,28 @@ public:
 
 	nodeType type()///<тип 
 	{	return quantifier_question_question;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: конкатенация
+ * Класс для определения узла типа конкатенация
+ */
+class node_concatenation :	public node
+{
+public:
+	QString m;
+
+	node_concatenation()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("con");	}
+
+	nodeType type()///<тип 
+	{	return concatenation;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
