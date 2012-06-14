@@ -69,7 +69,7 @@
  = 0x400000000000000,
  = 0x800000000000000,
  = 0x1000000000000000,
-empty = 0x2000000000000000,
+ = 0x2000000000000000,
 text = 0x4000000000000000*/
 
 /*!
@@ -1377,4 +1377,24 @@ public:
 
 	bool hasArg(QString & arg)
 	{	return (arg==QString("n")) ? true : false;	}
+};
+
+/*!
+ * \brief ”зел: пустота
+ *  ласс дл€ определени€ узла типа пустота
+ */
+class node_empty :	public node
+{
+public:
+	node_empty()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("empty");	}
+
+	nodeType type()///<тип 
+	{	return empty;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
 };
