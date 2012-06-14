@@ -24,8 +24,8 @@
  = 0x2000,
  = 0x4000,
  = 0x8000,
-quantifier_0n_question = 0x10000,
-quantifier_m0_question = 0x20000,
+ = 0x10000,
+ = 0x20000,
 quantifier_star_question = 0x40000,
 quantifier_plus_question = 0x80000,
 quantifier_question_question = 0x100000,
@@ -407,6 +407,50 @@ public:
 
 	nodeType type()///<тип 
 	{	return quantifier_m_question;	}
+
+	bool hasArg(QString & arg)
+	{	return ( arg==QString("m") ) ? true : false;	}
+};
+
+/*!
+ * \brief Узел: {,n}?
+ * Класс для определения узла типа {,n}?
+ */
+class node_quantifier_0n_question :	public node
+{
+public:
+	QString n;
+
+	node_quantifier_0n_question()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("kxnq");	}
+
+	nodeType type()///<тип 
+	{	return quantifier_0n_question;	}
+
+	bool hasArg(QString & arg)
+	{	return ( arg==QString("n") ) ? true : false;	}
+};
+
+/*!
+ * \brief Узел: {m,}?
+ * Класс для определения узла типа {m,}?
+ */
+class node_quantifier_m0_question :	public node
+{
+public:
+	QString m;
+
+	node_quantifier_m0_question()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("kmxq");	}
+
+	nodeType type()///<тип 
+	{	return quantifier_m0_question;	}
 
 	bool hasArg(QString & arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
