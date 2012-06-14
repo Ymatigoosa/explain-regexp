@@ -10,7 +10,7 @@
 /*enum nodeType : unsigned long long {
 = 0x1,
  = 0x2,
-quantifier_0n = 0x4,
+ = 0x4,
 quantifier_m0 = 0x8,
 quantifier_star = 0x10,
 quantifier_plus = 0x20,
@@ -103,7 +103,7 @@ public:
 class node_quantifier_m :	public node
 {
 public:
-	node_quantifier_m();///<конструктор по умолчанию
+	node_quantifier_m()///<конструктор по умолчанию
 	{
 	}
 	QString tagName()///<название тега
@@ -117,6 +117,30 @@ public:
 	bool hasArg(QString & arg)
 	{
 		return ( arg==QString("m") ) ? true : false;
+	}
+};
+
+/*!
+ * \brief Узел: {,n}
+ * Класс для определения узла типа {,n}
+ */
+class node_quantifier_0n :	public node
+{
+public:
+	node_quantifier_0n()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kxn");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_0n;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("n") ) ? true : false;
 	}
 };
 
