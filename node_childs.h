@@ -32,7 +32,7 @@
  = 0x200000,
  = 0x400000,
  = 0x800000,
-group_question = 0x1000000,
+ = 0x1000000,
 group_once = 0x2000000,
 condition_mask = 0x4000000,
 condition_mask_yes = 0x8000000,
@@ -463,7 +463,6 @@ public:
 class node_quantifier_star_question :	public node
 {
 public:
-	QString m;
 
 	node_quantifier_star_question()///<конструктор по умолчанию
 	{	}
@@ -485,7 +484,6 @@ public:
 class node_quantifier_plus_question :	public node
 {
 public:
-	QString m;
 
 	node_quantifier_plus_question()///<конструктор по умолчанию
 	{	}
@@ -507,7 +505,6 @@ public:
 class node_quantifier_question_question :	public node
 {
 public:
-	QString m;
 
 	node_quantifier_question_question()///<конструктор по умолчанию
 	{	}
@@ -529,7 +526,6 @@ public:
 class node_concatenation :	public node
 {
 public:
-	QString m;
 
 	node_concatenation()///<конструктор по умолчанию
 	{	}
@@ -551,7 +547,6 @@ public:
 class node_oor :	public node
 {
 public:
-	QString m;
 
 	node_oor()///<конструктор по умолчанию
 	{	}
@@ -573,7 +568,6 @@ public:
 class node_group :	public node
 {
 public:
-	QString m;
 
 	node_group()///<конструктор по умолчанию
 	{	}
@@ -583,6 +577,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return group;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?: )
+ * Класс для определения узла типа (?: )
+ */
+class node_group_question :	public node
+{
+public:
+
+	node_group_question()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("gq");	}
+
+	nodeType type()///<тип 
+	{	return group_question;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
