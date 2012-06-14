@@ -70,7 +70,7 @@
  = 0x800000000000000,
  = 0x1000000000000000,
  = 0x2000000000000000,
-text = 0x4000000000000000*/
+ = 0x4000000000000000*/
 
 /*!
  * \brief Узел: {m,n}
@@ -1397,4 +1397,26 @@ public:
 
 	bool hasArg(QString & arg)
 	{	return false;	}
+};
+
+/*!
+ * \brief Узел: text
+ * Класс для определения узла типа text
+ */
+class node_otext :	public node
+{
+public:
+	QString text;
+
+	node_otext()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("t");	}
+
+	nodeType type()///<тип 
+	{	return otext;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text")) ? true : false;	}
 };
