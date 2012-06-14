@@ -192,3 +192,26 @@ public:
 	}
 };
 
+/*!
+ * \brief Узел: +
+ * Класс для определения узла типа +
+ */
+class node_quantifier_plus :	public node
+{
+public:
+	node_quantifier_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return false;
+	}
+};
