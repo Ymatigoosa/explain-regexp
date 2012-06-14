@@ -215,3 +215,28 @@ public:
 		return false;
 	}
 };
+
+/*!
+ * \brief Узел: ?
+ * Класс для определения узла типа ?
+ */
+class node_quantifier_question :	public node
+{
+public:
+	node_quantifier_question()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kq");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_question;
+	}
+	bool hasArg(QString & arg)
+	{
+		return false;
+	}
+};
+
