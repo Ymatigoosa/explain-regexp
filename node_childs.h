@@ -40,8 +40,8 @@ modifier_i = 0x10000000,
 modifier_s = 0x20000000,
 modifier_u = 0x40000000,
 modifier_m = 0x80000000,
-condition_forward = 0x100000000,
-condition_forward_negative = 0x200000000,
+ = 0x100000000,
+ = 0x200000000,
 condition_back = 0x400000000,
 condition_back_negative = 0x800000000,
 assert_d = 0x1000000000,
@@ -661,6 +661,48 @@ public:
 
 	nodeType type()///<тип 
 	{	return condition_mask_yes;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?=text)
+ * Класс для определения узла типа (?=text)
+ */
+class node_condition_forward :	public node
+{
+public:
+
+	node_condition_forward()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("cf");	}
+
+	nodeType type()///<тип 
+	{	return condition_forward;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?!text)
+ * Класс для определения узла типа (?!text)
+ */
+class node_condition_forward_negative :	public node
+{
+public:
+
+	node_condition_forward_negative()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("cfn");	}
+
+	nodeType type()///<тип 
+	{	return condition_forward_negative;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
