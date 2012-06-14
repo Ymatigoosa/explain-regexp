@@ -78,10 +78,10 @@ text = 0x4000000000000000*/
  */
 class node_quantifier_mn :	public node
 {
-private:
+public:
 	QString m;
 	QString n;
-public:
+
 	node_quantifier_mn()///<конструктор по умолчанию
 	{	}
 
@@ -101,9 +101,9 @@ public:
  */
 class node_quantifier_m :	public node
 {
-private:
-	QString m;
 public:
+	QString m;
+
 	node_quantifier_m()///<конструктор по умолчанию
 	{	}
 	QString tagName()///<название тега
@@ -120,9 +120,9 @@ public:
  */
 class node_quantifier_0n :	public node
 {
-private:
-	QString n;
 public:
+	QString n;
+
 	node_quantifier_0n()///<конструктор по умолчанию
 	{	}
 
@@ -142,9 +142,9 @@ public:
  */
 class node_quantifier_m0 :	public node
 {
-private:
-	QString m;
 public:
+	QString m;
+
 	node_quantifier_m0()///<конструктор по умолчанию
 	{	}
 
@@ -224,10 +224,10 @@ public:
  */
 class node_quantifier_mn_plus :	public node
 {
-private:
+public:
 	QString n;
 	QString m;
-public:
+
 	node_quantifier_mn_plus()///<конструктор по умолчанию
 	{	}
 
@@ -247,9 +247,9 @@ public:
  */
 class node_quantifier_m_plus :	public node
 {
-private:
-	QString m;
 public:
+	QString m;
+
 	node_quantifier_m_plus()///<конструктор по умолчанию
 	{	}
 
@@ -269,9 +269,9 @@ public:
  */
 class node_quantifier_0n_plus :	public node
 {
-private:
-	QString n;
 public:
+	QString n;
+
 	node_quantifier_0n_plus()///<конструктор по умолчанию
 	{	}
 
@@ -291,9 +291,9 @@ public:
  */
 class node_quantifier_m0_plus :	public node
 {
-private:
-	QString m;
 public:
+	QString m;
+
 	node_quantifier_m0_plus()///<конструктор по умолчанию
 	{	}
 
