@@ -83,20 +83,16 @@ private:
 	QString n;
 public:
 	node_quantifier_mn()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kmn");
-	}
+	{	return QString("kmn");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_mn;
-	}
+	{	return quantifier_mn;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") || arg==QString("n") ) ? true : false;
-	}
+	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
 };
 
 /*!
@@ -109,20 +105,13 @@ private:
 	QString m;
 public:
 	node_quantifier_m()///<конструктор по умолчанию
-	{
-	}
+	{	}
 	QString tagName()///<название тега
-	{
-		return QString("km");
-	}
+	{	return QString("km");	}
 	nodeType type()///<тип 
-	{
-		return quantifier_m;
-	}
+	{	return quantifier_m;	}
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") ) ? true : false;
-	}
+	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
 /*!
@@ -135,20 +124,16 @@ private:
 	QString n;
 public:
 	node_quantifier_0n()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kxn");
-	}
+	{	return QString("kxn");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_0n;
-	}
+	{	return quantifier_0n;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("n") ) ? true : false;
-	}
+	{	return ( arg==QString("n") ) ? true : false;	}
 };
 
 /*!
@@ -161,20 +146,16 @@ private:
 	QString m;
 public:
 	node_quantifier_m0()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kmx");
-	}
+	{	return QString("kmx");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_m0;
-	}
+	{	return quantifier_m0;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") ) ? true : false;
-	}
+	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
 /*!
@@ -185,20 +166,16 @@ class node_quantifier_star :	public node
 {
 public:
 	node_quantifier_star()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("ks");
-	}
+	{	return QString("ks");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_star;
-	}
+	{	return quantifier_star;	}
+
 	bool hasArg(QString & arg)
-	{
-		return false;
-	}
+	{	return false;	}
 };
 
 /*!
@@ -209,20 +186,16 @@ class node_quantifier_plus :	public node
 {
 public:
 	node_quantifier_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kp");
-	}
+	{	return QString("kp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_plus;
-	}
+	{	return quantifier_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return false;
-	}
+	{	return false;	}
 };
 
 /*!
@@ -233,20 +206,16 @@ class node_quantifier_question :	public node
 {
 public:
 	node_quantifier_question()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kq");
-	}
+	{	return QString("kq");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_question;
-	}
+	{	return quantifier_question;	}
+
 	bool hasArg(QString & arg)
-	{
-		return false;
-	}
+	{	return false;	}
 };
 
 /*!
@@ -260,20 +229,16 @@ private:
 	QString m;
 public:
 	node_quantifier_mn_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kmnp");
-	}
+	{	return QString("kmnp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_mn_plus;
-	}
+	{	return quantifier_mn_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") || arg==QString("n") ) ? true : false;
-	}
+	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
 };
 
 /*!
@@ -286,20 +251,16 @@ private:
 	QString m;
 public:
 	node_quantifier_m_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kmp");
-	}
+	{	return QString("kmp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_m_plus;
-	}
+	{	return quantifier_m_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") ) ? true : false;
-	}
+	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
 /*!
@@ -312,20 +273,16 @@ private:
 	QString n;
 public:
 	node_quantifier_0n_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kxnp");
-	}
+	{	return QString("kxnp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_0n_plus;
-	}
+	{	return quantifier_0n_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("n") ) ? true : false;
-	}
+	{	return ( arg==QString("n") ) ? true : false;	}
 };
 
 /*!
@@ -338,20 +295,16 @@ private:
 	QString m;
 public:
 	node_quantifier_m0_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("kmxp");
-	}
+	{	return QString("kmxp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_m0_plus;
-	}
+	{	return quantifier_m0_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return ( arg==QString("m") ) ? true : false;
-	}
+	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
 /*!
@@ -362,18 +315,14 @@ class node_quantifier_star_plus :	public node
 {
 public:
 	node_quantifier_star_plus()///<конструктор по умолчанию
-	{
-	}
+	{	}
+
 	QString tagName()///<название тега
-	{
-		return QString("ksp");
-	}
+	{	return QString("ksp");	}
+
 	nodeType type()///<тип 
-	{
-		return quantifier_star_plus;
-	}
+	{	return quantifier_star_plus;	}
+
 	bool hasArg(QString & arg)
-	{
-		return false;
-	}
+	{	return false;	}
 };
