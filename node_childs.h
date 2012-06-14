@@ -42,7 +42,7 @@ modifier_u = 0x40000000,
 modifier_m = 0x80000000,
  = 0x100000000,
  = 0x200000000,
-condition_back = 0x400000000,
+ = 0x400000000,
 condition_back_negative = 0x800000000,
 assert_d = 0x1000000000,
 assert_cap = 0x2000000000,
@@ -703,6 +703,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return condition_forward_negative;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?<=text)
+ * Класс для определения узла типа (?<=text)
+ */
+class node_condition_back :	public node
+{
+public:
+
+	node_condition_back()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("cb");	}
+
+	nodeType type()///<тип 
+	{	return condition_back;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
