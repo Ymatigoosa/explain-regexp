@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Тесты
+ * Класс на основе QtTest, осуществляет автоматический запуск тестов.
+ */
 class test_description : public QObject
 {
     Q_OBJECT
