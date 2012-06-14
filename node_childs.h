@@ -60,7 +60,7 @@
  = 0x2000000000000,
  = 0x4000000000000,
  = 0x8000000000000,
-range = 0x10000000000000,
+ = 0x10000000000000,
 symbol = 0x20000000000000,
 link = 0x40000000000000,
 operand_a = 0x80000000000000,
@@ -1182,4 +1182,27 @@ public:
 	 * \param[in] text аргумент text тега sc
 	 */
 	void buildChildsFromText(QString &text);
+};
+
+/*!
+ * \brief Узел: a-z(внутри [ ])
+ * Класс для определения узла типа a-z(внутри [ ])
+ */
+class node_range :	public node
+{
+public:
+	QString start;
+	QString end;
+
+	node_range()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("range");	}
+
+	nodeType type()///<тип 
+	{	return range;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("start") || arg==QString("end")) ? true : false;	}
 };
