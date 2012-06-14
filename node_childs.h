@@ -27,7 +27,7 @@
  = 0x10000,
  = 0x20000,
  = 0x40000,
-quantifier_plus_question = 0x80000,
+ = 0x80000,
  = 0x100000,
 concatenation = 0x200000,
 oor = 0x400000,
@@ -473,6 +473,28 @@ public:
 
 	nodeType type()///<тип 
 	{	return quantifier_star_question;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: +?
+ * Класс для определения узла типа +?
+ */
+class node_quantifier_plus_question :	public node
+{
+public:
+	QString m;
+
+	node_quantifier_plus_question()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("kpq");	}
+
+	nodeType type()///<тип 
+	{	return quantifier_plus_question;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
