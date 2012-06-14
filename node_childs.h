@@ -311,3 +311,29 @@ public:
 		return ( arg==QString("n") ) ? true : false;
 	}
 };
+
+/*!
+ * \brief Узел: {m,}+
+ * Класс для определения узла типа {m,}+
+ */
+class node_quantifier_m0_plus :	public node
+{
+private:
+	QString m;
+public:
+	node_quantifier_m0_plus()///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("kxnp");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_m0_plus;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("m") ) ? true : false;
+	}
+};
