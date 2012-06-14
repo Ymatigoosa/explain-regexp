@@ -34,7 +34,7 @@
  = 0x800000,
  = 0x1000000,
  = 0x2000000,
-condition_mask = 0x4000000,
+ = 0x4000000,
 condition_mask_yes = 0x8000000,
 modifier_i = 0x10000000,
 modifier_s = 0x20000000,
@@ -619,6 +619,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return group_once;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?(условие) подшаблон1| подшаблон2)
+ * Класс для определения узла типа (?(условие) подшаблон1| подшаблон2)
+ */
+class node_condition_mask :	public node
+{
+public:
+
+	node_condition_mask()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("cm");	}
+
+	nodeType type()///<тип 
+	{	return condition_mask;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
