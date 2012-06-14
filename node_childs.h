@@ -30,7 +30,7 @@
  = 0x80000,
  = 0x100000,
  = 0x200000,
-oor = 0x400000,
+ = 0x400000,
 group = 0x800000,
 group_question = 0x1000000,
 group_once = 0x2000000,
@@ -539,6 +539,28 @@ public:
 
 	nodeType type()///<тип 
 	{	return concatenation;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: |
+ * Класс для определения узла типа |
+ */
+class node_oor :	public node
+{
+public:
+	QString m;
+
+	node_oor()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("or");	}
+
+	nodeType type()///<тип 
+	{	return oor;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
