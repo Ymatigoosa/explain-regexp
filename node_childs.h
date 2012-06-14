@@ -61,8 +61,8 @@
  = 0x4000000000000,
  = 0x8000000000000,
  = 0x10000000000000,
-symbol = 0x20000000000000,
-link = 0x40000000000000,
+ = 0x20000000000000,
+ = 0x40000000000000,
 operand_a = 0x80000000000000,
 operand_e = 0x100000000000000,
 operand_n = 0x200000000000000,
@@ -1206,3 +1206,26 @@ public:
 	bool hasArg(QString & arg)
 	{	return (arg==QString("start") || arg==QString("end")) ? true : false;	}
 };
+
+/*!
+ * \brief Узел: символ(внутри [ ])
+ * Класс для определения узла типа символ(внутри [ ])
+ */
+class node_symbol :	public node
+{
+public:
+	QString text;
+
+	node_symbol()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("symbol");	}
+
+	nodeType type()///<тип 
+	{	return symbol;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text") ) ? true : false;	}
+};
+
