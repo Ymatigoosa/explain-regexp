@@ -58,8 +58,8 @@
  = 0x800000000000,
  = 0x1000000000000,
  = 0x2000000000000,
-symbol_class = 0x4000000000000,
-symbol_class_negative = 0x8000000000000,
+ = 0x4000000000000,
+ = 0x8000000000000,
 range = 0x10000000000000,
 symbol = 0x20000000000000,
 link = 0x40000000000000,
@@ -1127,3 +1127,32 @@ public:
 	bool hasArg(QString & arg)
 	{	return false;	}
 };
+
+/*!
+ * \brief ”зел: [symb]
+ *  ласс дл€ определени€ узла типа [symb]
+ */
+class node_symbol_class :	public node
+{
+public:
+	QString text;
+
+	node_symbol_class()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("sc");	}
+
+	nodeType type()///<тип 
+	{	return symbol_class;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text")) ? true : false;	}
+
+	/*!
+	 * –азбирает текст аргумента text и на основе содержимого порождает потомков
+	 * \param[in] text аргумент text тега sc
+	 */
+	void buildChildsFromText(QString &text);
+};
+
