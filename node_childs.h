@@ -49,7 +49,7 @@
  = 0x4000000000,
  = 0x8000000000,
  = 0x10000000000,
-assert_z_big = 0x20000000000,
+ = 0x20000000000,
 assert_z = 0x40000000000,
 operand_d = 0x80000000000,
 operand_d_big = 0x100000000000,
@@ -934,6 +934,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return assert_a_big;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \Z
+ * Класс для определения узла типа \Z
+ */
+class node_assert_z_big :	public node
+{
+public:
+
+	node_assert_z_big()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("azb");	}
+
+	nodeType type()///<тип 
+	{	return assert_z_big;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
