@@ -96,5 +96,27 @@ public:
 	}
 };
 
-
+/*!
+ * \brief Узел: {m}
+ * Класс для определения узла типа {m}
+ */
+class node_quantifier_m :	public node
+{
+public:
+	node_quantifier_m();///<конструктор по умолчанию
+	{
+	}
+	QString tagName()///<название тега
+	{
+		return QString("km");
+	}
+	nodeType type()///<тип 
+	{
+		return quantifier_m;
+	}
+	bool hasArg(QString & arg)
+	{
+		return ( arg==QString("m") ) ? true : false;
+	}
+};
 
