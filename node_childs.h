@@ -53,9 +53,9 @@
  = 0x40000000000,
  = 0x80000000000,
  = 0x100000000000,
-operand_s = 0x200000000000,
-operand_s_big = 0x400000000000,
-operand_w = 0x800000000000,
+ = 0x200000000000,
+ = 0x400000000000,
+ = 0x800000000000,
 operand_w_big = 0x1000000000000,
 dot = 0x2000000000000,
 symbol_class = 0x4000000000000,
@@ -1018,6 +1018,69 @@ public:
 
 	nodeType type()///<тип 
 	{	return operand_d_big;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \s
+ * Класс для определения узла типа \s
+ */
+class node_operand_s :	public node
+{
+public:
+
+	node_operand_s()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("os");	}
+
+	nodeType type()///<тип 
+	{	return operand_s;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \S
+ * Класс для определения узла типа \S
+ */
+class node_operand_s_big :	public node
+{
+public:
+
+	node_operand_s_big()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("osb");	}
+
+	nodeType type()///<тип 
+	{	return operand_s_big;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: \w
+ * Класс для определения узла типа \w
+ */
+class node_operand_w :	public node
+{
+public:
+
+	node_operand_w()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("ow");	}
+
+	nodeType type()///<тип 
+	{	return operand_w;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
