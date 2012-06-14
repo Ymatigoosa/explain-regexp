@@ -39,7 +39,7 @@
  = 0x10000000,
  = 0x20000000,
  = 0x40000000,
-modifier_m = 0x80000000,
+ = 0x80000000,
  = 0x100000000,
  = 0x200000000,
  = 0x400000000,
@@ -808,6 +808,27 @@ public:
 
 	nodeType type()///<тип 
 	{	return modifier_u;	}
+
+	bool hasArg(QString & arg)
+	{	return false;	}
+};
+
+/*!
+ * \brief Узел: (?m)
+ * Класс для определения узла типа (?m)
+ */
+class node_modifier_m :	public node
+{
+public:
+
+	node_modifier_m()///<конструктор по умолчанию
+	{	}
+
+	QString tagName()///<название тега
+	{	return QString("mm");	}
+
+	nodeType type()///<тип 
+	{	return modifier_m;	}
 
 	bool hasArg(QString & arg)
 	{	return false;	}
