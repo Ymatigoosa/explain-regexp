@@ -30,6 +30,13 @@ node * test_description::tree_alt_pattern1()
 
 	return parent;
 }
+node * test_description::tree_alt_form()
+{
+	node * parent = new node_quantifier_star();
+	parent->addChild(new node_operand_s());
+
+	return parent;
+}
 
 node * test_description::tree_quantifier()
 {
@@ -42,6 +49,17 @@ node * test_description::tree_quantifier()
 
 	return parent;
 }
+node * test_description::tree_quantifier2()
+{
+	node * parent = new node_oor();
+	parent->addChild(new node_quantifier_m("5"));
+	parent->child(0)->addChild(new node_dot());
+
+	parent->addChild(new node_quantifier_m("1024"));
+	parent->child(1)->addChild(new node_dot());
+
+	return parent;
+}
 
 void test_description::descriptionTest_data()
 {
@@ -49,15 +67,19 @@ void test_description::descriptionTest_data()
 	 QTest::addColumn<QString>("expected description");
 
 	 QTest::newRow("standart patterns") << tree_standart_patterns() << QString("любой из символов от 0 до 9 не менее 1 раза” или “любой из символов от A до Z не менее 1 раза” или “любой из символов от a до z не менее 1 раза");
-	 QTest::newRow("quantifier") << tree_quantifier() << QString("любой символ 2 раза” или “любой символ 112 раз");
+	 QTest::newRow("quantifier1") << tree_quantifier() << QString("любой символ 2 раза” или “любой символ 112 раз");
+	 QTest::newRow("quantifier2") << tree_quantifier() << QString("любой символ 5 раз” или “любой символ 1024 раза");
 	 QTest::newRow("alt pattern1") << tree_alt_pattern1() << QString("любая последовательность символов или её отсутсвие");
+	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
 }
 void test_description::descriptionTest()
 {
 	QFETCH(node *, parent);
     QFETCH(QString, expected);
 	
-	/*QString result =  parent->description();*/
+	QString result =  parent->description(*patterns);
+
+	QVERIFY2(result==expected,qPrintable(QString("node::description returns:\n%1\nexpected:\n%2").arg(result).arg(expected)) );
 }
 
 void test_description::initTestCase()

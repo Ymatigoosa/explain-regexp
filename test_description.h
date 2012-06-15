@@ -16,7 +16,9 @@ class test_description : public QObject
 private:
 	node * tree_standart_patterns();
 	node * tree_alt_pattern1();
+	node * tree_alt_form();
 	node * tree_quantifier();
+	node * tree_quantifier2();
 	patternContainer * patterns;
 private slots:
 	
