@@ -13,3 +13,16 @@ node::~node()
 	}
 	delete this;
 }
+
+
+int node::addChild(node * child)
+{
+	childs.append(child);
+	return childs.count();
+}
+
+
+node * node::child(int n)
+{
+	return childs.at(n);
+}

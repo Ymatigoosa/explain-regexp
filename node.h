@@ -66,10 +66,17 @@ public:
 
 	/*!
 	 * добавляет ребенка к вершине дерева
-	 * \param[in] указатель адрес ребенка
+	 * \param[in] child указатель адрес ребенка
 	 * \return номер ребенка
 	 */
-	int addChild(const node * child);
+	int addChild(node * child);
+
+	/*!
+	 * возвращает указатель на ребенка с номером n
+	 * \param[in] n номер ребенка
+	 * \return указатель на ребенка
+	 */
+	node * child(int n);
 };
 
 #endif // NODE_H
