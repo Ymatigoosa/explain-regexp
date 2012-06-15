@@ -17,8 +17,27 @@ private:
 	node * tree_standart_patterns();
 	node * tree_alt_pattern1();
 	node * tree_quantifier();
+	patternContainer * patterns;
 private slots:
+	
+	/*!
+	 * Перед тестами читаем шаблоны из файла
+	 */
+	void initTestCase();
+	
+	/*!
+	 * После тестов очищаем память
+	 */
+	void cleanupTestCase();
+
+	/*!
+	 * Данные для тестов (деревья/строки описания)
+	 */
     void descriptionTest_data();
+	
+	/*!
+	 * Запуск единичного теста
+	 */
 	void descriptionTest();
 };
 

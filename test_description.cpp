@@ -1,7 +1,8 @@
 #include "test_description.h"
 
-
 Q_DECLARE_METATYPE(node *)
+
+patternContainer * readPatterns(QString &filename) throw (...);
 
 node * test_description::tree_standart_patterns()
 {
@@ -57,4 +58,13 @@ void test_description::descriptionTest()
     QFETCH(QString, expected);
 	
 	/*QString result =  parent->description();*/
+}
+
+void test_description::initTestCase()
+{
+	patterns = readPatterns(QString("patterns.xml"));
+}
+void test_description::cleanupTestCase()
+{
+	delete patterns;
 }
