@@ -45,13 +45,14 @@ public:
 	 * \param[in,out]	num			номер узла по порядку, если num отрицательно – не вести нумерацию
 	 * \return строка-описание
 	 */
-    QString description(const patternContainer & patterns, int * num, node * parent=0, QString form = QString());
+    QString description(const patternContainer & patterns, int num=-1, node * parent=0, QString form = QString());
 	
 	/*!
 	 * Выбирает наиболее подходящий шаблон для узла из структуры nodePattern
 	 * \param[in]	_nodePattern	список шаблонов узла с условиями применения
 	 * \param[in]	parent		ссылка на родителя для проверки условий
 	 * \param[in]	form	требуемая форма (пустая строка – стандартная форма)
+	 * \param[in]	num	номер узла по порядку, если num отрицательно – не вести нумерацию
 	 * \return строка-описание
 	 */
 	QString pattern(const nodePattern & _nodePattern, node * parent=0, QString form = QString());
