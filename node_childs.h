@@ -18,6 +18,8 @@ public:
 
 	node_quantifier_mn()///<конструктор по умолчанию
 	{	}
+	node_quantifier_mn(QString _m,QString _n)
+	{ m=_m;n=_n;	}
 
 	QString tagName()///<название тега
 	{	return QString("kmn");	}
@@ -40,6 +42,9 @@ public:
 
 	node_quantifier_m()///<конструктор по умолчанию
 	{	}
+	node_quantifier_m(QString _m)
+	{ m=_m;	}
+
 	QString tagName()///<название тега
 	{	return QString("km");	}
 	nodeType type()///<тип 
@@ -1130,6 +1135,9 @@ public:
 
 	node_range()///<конструктор по умолчанию
 	{	}
+
+	node_range(QString _start,QString _end)
+	{ start=_start;	end=_end;	}
 
 	QString tagName()///<название тега
 	{	return QString("range");	}
