@@ -5,6 +5,7 @@
 #pragma once
 #include "node.h"
 #include "nodeType.h"
+#pragma warning( disable : 4100 )
 
 /*!
  * \brief Узел: {m,n}
@@ -1362,3 +1363,4 @@ public:
 	bool hasArg(QString & arg)
 	{	return (arg==QString("text")) ? true : false;	}
 };
+#pragma warning( default : 4100 )
