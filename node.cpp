@@ -26,3 +26,8 @@ node * node::child(int n)
 {
 	return childs.at(n);
 }
+
+QString node::description(const patternContainer & patterns, int num, node * parent, QString form)
+{
+	return QString();
+}
