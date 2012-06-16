@@ -79,9 +79,9 @@ void tests::descriptionTest()
     QFETCH(QString,expected);
 	
 	QString result =  root->description(*patterns);
-	QString msg = QString("node::description returns:\n%1\nexpected:\n%2\n").arg(result).arg(expected);
-
-	QVERIFY2(result==expected,qPrintable(msg) );
+	printf("\nExpected: %s\n",qPrintable(QString(expected)));
+	printf("Returned: %s\n",qPrintable(QString(result)));	
+	QVERIFY(result==expected);	
 }
 
 void tests::initTestCase()
