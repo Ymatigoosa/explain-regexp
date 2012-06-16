@@ -1,6 +1,7 @@
 #include "tests.h"
 
 Q_DECLARE_METATYPE(node *)
+Q_DECLARE_METATYPE(variant)
 
 patternContainer * readPatterns(QString &filename) throw (...);
 
@@ -157,12 +158,48 @@ void tests::patternTest()
 
 void tests::checkTest_data()
 {
+	QTest::addColumn<node*>("parent");
+	QTest::addColumn<node*>("current");
+	QTest::addColumn<variant>("pattern");
+	QTest::addColumn<bool>("expected");
+	
+	node *parent, *current;//временные переменные для заполнения таблицы
+	variant temp;
 
+	temp.form = "g";
+	parent = tree_alt_form();
+	current = parent->child(0);
+	QTest::newRow("form accept") << parent << current << temp << true;
+
+	temp.form = "g";
+	parent = tree_alt_pattern1();
+	current = parent->child(0);
+	QTest::newRow("form dont accept") << parent << current << temp << false;
+
+	temp.childiType[0] = oor;
+	parent = 0;
+	current = tree_alt_pattern3();
+	QTest::newRow("variant accept") << parent << current << temp << true;
+
+	temp.childiType[0] = oor;
+	parent = 0;
+	current = tree_alt_pattern2();
+	QTest::newRow("variant dont accept") << parent << current << temp << false;
 }	
 
 void tests::checkTest()
 {
+	QFETCH(node*,parent);
+	QFETCH(node*,current);
+	QFETCH(variant,pattern);
+    QFETCH(bool,expected);
 
+	bool result = current->check(pattern,parent);
+	if(parent==0)
+		delete current;
+	else
+		delete parent;
+	QVERIFY(result==expected);
 }
 
 void tests::initTestCase()
