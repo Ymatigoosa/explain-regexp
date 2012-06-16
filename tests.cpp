@@ -202,6 +202,38 @@ void tests::checkTest()
 	QVERIFY(result==expected);
 }
 
+void tests::hasArgTest_data()
+{
+	QTest::addColumn<node*>("parent");
+	QTest::addColumn<QString>("arg");
+	QTest::addColumn<bool>("expected");
+	//временные переменные для заполнения таблицы
+	node *parent;
+
+	parent = new node_quantifier_mn("5","16");
+	QTest::newRow("right arg") << parent << QString("m") << true;
+
+	parent = new node_quantifier_m("5");
+	QTest::newRow("wrong arg") << parent << QString("n") << false;
+
+	parent = new node_oor();
+	QTest::newRow("without args") << parent << QString("n") << false;
+
+	parent = new node_otext(QString("saddas"));
+	QTest::newRow("right arg2") << parent << QString("text") << true;
+}
+	
+void tests::hasArgTest()
+{
+	QFETCH(node*,parent);
+	QFETCH(QString,arg);
+	QFETCH(bool,expected);
+
+	bool result = parent->hasArg(arg);
+	delete parent;
+	QVERIFY(result==expected);
+}
+
 void tests::initTestCase()
 {
 	patterns = readPatterns(QString("patterns.xml"));

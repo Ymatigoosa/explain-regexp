@@ -143,7 +143,7 @@ private slots:
 	void patternTest();
 
 	/*!
-	 * Данные для тестов node::check (деревья/шаблоны)
+	 * Данные для тестов node::check (деревья/шаблоны/результат)
 	 */
     void checkTest_data();
 	
@@ -151,6 +151,16 @@ private slots:
 	 * Запуск единичного теста для node::check
 	 */
 	void checkTest();
+
+	/*!
+	 * Данные для тестов node::hasArg (деревья/аргумент/результат)
+	 */
+    void hasArgTest_data();
+	
+	/*!
+	 * Запуск единичного теста для node::hasArg
+	 */
+	void hasArgTest();
 };
 
 #endif // tests_H
