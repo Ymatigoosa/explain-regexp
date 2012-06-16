@@ -18,6 +18,27 @@ public:
 	 Создает дерево вида:
 	 \dot
 	 digraph g{
+	 "|"->"a"
+	 "|"->"b"
+	 }
+	 \enddot
+	 */
+	node * tree_standart_patterns();
+	
+	/*!
+	 Создает дерево вида:
+	 \dot
+	 digraph g{
+	 "*"->"."
+	 }
+	 \enddot
+	 */
+	node * tree_alt_pattern1();
+
+	/*!
+	 Создает дерево вида:
+	 \dot
+	 digraph g{
 	 sc1 [label="[...]"]
 	 sc2 [label="[...]"]
 	 sc3 [label="[...]"]
@@ -39,18 +60,7 @@ public:
 	 }
 	 \enddot
 	 */
-	node * tree_standart_patterns();
-	
-	/*!
-	 Создает дерево вида:
-	 \dot
-	 digraph g{
-	 "*"->"."
-	 }
-	 \enddot
-	 */
-	node * tree_alt_pattern1();
-
+	node * tree_alt_pattern2();
 	/*!
 	 Создает дерево вида:
 	 \dot
@@ -97,12 +107,12 @@ private slots:
 	void cleanupTestCase();
 
 	/*!
-	 * Данные для тестов (деревья/строки описания)
+	 * Данные для тестов node::description (деревья/строки описания)
 	 */
     void descriptionTest_data();
 	
 	/*!
-	 * Запуск единичного теста
+	 * Запуск единичного теста для node::description
 	 */
 	void descriptionTest();
 };

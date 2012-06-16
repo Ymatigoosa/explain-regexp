@@ -7,6 +7,22 @@ patternContainer * readPatterns(QString &filename) throw (...);
 node * tests::tree_standart_patterns()
 {
 	node * parent = new node_oor();
+	parent->addChild(new node_otext(QString("a")));
+	parent->addChild(new node_otext(QString("b")));
+
+	return parent;
+}
+
+node * tests::tree_alt_pattern1()
+{
+	node * parent = new node_quantifier_star();
+	parent->addChild(new node_dot());
+
+	return parent;
+}
+node * tests::tree_alt_pattern2()
+{
+	node * parent = new node_oor();
 	parent->addChild(new node_quantifier_plus());
 	parent->child(0)->addChild(new node_symbol_class());
 	parent->child(0)->child(0)->addChild(new node_range("0","9"));
@@ -19,14 +35,6 @@ node * tests::tree_standart_patterns()
 	parent->child(1)->addChild(new node_quantifier_plus());
 	parent->child(1)->child(1)->addChild(new node_symbol_class());
 	parent->child(1)->child(1)->child(0)->addChild(new node_range("a","z"));
-
-	return parent;
-}
-
-node * tests::tree_alt_pattern1()
-{
-	node * parent = new node_quantifier_star();
-	parent->addChild(new node_dot());
 
 	return parent;
 }
@@ -66,11 +74,13 @@ void tests::descriptionTest_data()
 	 QTest::addColumn<node*>("root");
 	 QTest::addColumn<QString>("expected");
 
+	 QTest::newRow("standart forms") << tree_standart_patterns() << QString("a или b");
 	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
-	 QTest::newRow("standart patterns") << tree_standart_patterns() << QString("любой из символов от 0 до 9 не менее 1 раза” или “любой из символов от A до Z не менее 1 раза” или “любой из символов от a до z не менее 1 раза");
-	 QTest::newRow("quantifier1") << tree_quantifier() << QString("любой символ 2 раза” или “любой символ 112 раз");
-	 QTest::newRow("quantifier2") << tree_quantifier() << QString("любой символ 5 раз” или “любой символ 1024 раза");
+	 QTest::newRow("quantifier1") << tree_quantifier() << QString("любой символ 2 раза или любой символ 112 раз");
+	 QTest::newRow("quantifier2") << tree_quantifier() << QString("любой символ 5 раз или любой символ 1024 раза");
 	 QTest::newRow("alt pattern1") << tree_alt_pattern1() << QString("любая последовательность символов или её отсутсвие");
+	 QTest::newRow("alt pattern2") << tree_alt_pattern2() << QString("любой из символов от 0 до 9 не менее 1 раза или любой из символов от A до Z не менее 1 раза, или любой из символов от a до z не менее 1 раза");
+
 	
 }
 void tests::descriptionTest()
