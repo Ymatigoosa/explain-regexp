@@ -1,20 +1,22 @@
-﻿/*!
+/*!
  * \file main.cpp
- * Основной алгоритм программы
+ * �������� �������� ���������
  */
 #include <QtCore/QCoreApplication>
 #include "nodeType.h"
 #include "patterncontainer.h"
+#include <tests.h>
 #include <QDomNode>
 #include <qfile.h>
 #include <QMap>
 #include <QTextCodec>
+#include <clocale>
 
 /*!
- * Возвращает карту соотвествия тега и типа
- * \return QMap ключ - тег, знаечние - тип
+ * ���������� ����� ����������� ���� � ����
+ * \return QMap ���� - ���, �������� - ���
  */
-QMap<QString,nodeType> & buildTagsMap()
+const QMap<QString,nodeType> & buildTagsMap()
 {
 	static QMap<QString,nodeType> result;
 	if(result.isEmpty())
@@ -86,50 +88,21 @@ QMap<QString,nodeType> & buildTagsMap()
 	return result;
 }
 
-/*!
- * Читает список шаблонов из xml файла
- * \param[in] filename имя файла содержащего список шаблонов
- * \return Контейнер шаблонов (память выделяется динамически!)
- * \throw char* строка с ошибкой
- */
-patternContainer * readPatterns(QString &filename) throw (char *)
-{
-	patternContainer * data = new patternContainer();
-	QMap<QString,nodeType> & tags = buildTagsMap();
-	QDomElement currentElement;
 
-	QFile file(filename);					//открывает файл с шаблонами
-	if (!file.open(QIODevice::ReadOnly))	//проверка
-		throw "file open errror";			//выходим при ошибке
-
-	QDomDocument domDocument;				//для разбора xml
-	QString errorStr;						//текст ошибки xml
-	int errorLine,errorColumn;
-
-	if (!domDocument.setContent(&file, false, &errorStr, &errorLine, &errorColumn)) //устанавливаем контекст
-	{
-         throw qPrintable(QString("Parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr));//выталкиваем ошибку
-	}
-
-	QDomNode n = domDocument.firstChild();	//n - ребенок по порядку
-	while (!n.isNull()) 
-	{
-		if (n.isElement()) 
-		{
-			currentElement = n.toElement();
-			if( currentElement.tagName()==QString("default") && currentElement.hasAttribute("type") && tags.contains(currentElement.attribute("type")) );//если шаблон стандартный
-			//data->addDefault(currentElement.attribute("type"), currentElement.text());
-			
-		}
-		n = n.nextSibling();
-	}
-}
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QTextCodec *tc=QTextCodec::codecForName("CP1251");
+	
+	//��������� ����� � �������
+    QTextCodec *tc=QTextCodec::codecForName("windows-1251");
 	QTextCodec::setCodecForCStrings(tc);
+	QTextCodec::setCodecForLocale(tc);
+	setlocale( LC_ALL, "Russian_Russia.1251" );
+	
+	//������ ������
+	tests t1;
+	QTest::qExec(&t1);
 
     return a.exec();
 }
