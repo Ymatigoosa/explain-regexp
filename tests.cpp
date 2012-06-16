@@ -24,18 +24,19 @@ node * tests::tree_alt_pattern1()
 node * tests::tree_alt_pattern2()
 {
 	node * parent = new node_oor();
-	parent->addChild(new node_quantifier_plus());
-	parent->child(0)->addChild(new node_symbol_class());
-	parent->child(0)->child(0)->addChild(new node_range("0","9"));
 
 	parent->addChild(new node_oor());
-	parent->child(1)->addChild(new node_quantifier_plus());
-	parent->child(1)->child(0)->addChild(new node_symbol_class());
-	parent->child(1)->child(0)->child(0)->addChild(new node_range("A","Z"));
+	parent->child(0)->addChild(new node_quantifier_plus());
+	parent->child(0)->child(0)->addChild(new node_symbol_class());
+	parent->child(0)->child(0)->child(0)->addChild(new node_range("A","Z"));
 
-	parent->child(1)->addChild(new node_quantifier_plus());
-	parent->child(1)->child(1)->addChild(new node_symbol_class());
-	parent->child(1)->child(1)->child(0)->addChild(new node_range("a","z"));
+	parent->child(0)->addChild(new node_quantifier_plus());
+	parent->child(0)->child(1)->addChild(new node_symbol_class());
+	parent->child(0)->child(1)->child(0)->addChild(new node_range("a","z"));
+
+	parent->addChild(new node_quantifier_plus());
+	parent->child(1)->addChild(new node_symbol_class());
+	parent->child(1)->child(0)->addChild(new node_range("0","9"));
 
 	return parent;
 }
@@ -47,6 +48,14 @@ node * tests::tree_alt_pattern3()
 	parent->child(0)->addChild(new node_otext(QString("a")));
 	parent->child(0)->addChild(new node_otext(QString("b")));
 	parent->addChild(new node_otext(QString("c")));
+
+	return parent;
+}
+node * tests::tree_alt_pattern4()
+{
+	node * parent = new node_concatenation();
+	parent->addChild(new node_link(QString("1")));
+	parent->addChild(new node_link(QString("2")));
 
 	return parent;
 }
@@ -64,7 +73,7 @@ node * tests::tree_quantifier()
 	parent->addChild(new node_quantifier_m("2"));
 	parent->child(0)->addChild(new node_dot());
 
-	parent->addChild(new node_quantifier_m("122"));
+	parent->addChild(new node_quantifier_m("112"));
 	parent->child(1)->addChild(new node_dot());
 
 	return parent;
@@ -114,22 +123,23 @@ void tests::patternTest_data()
 	QTest::addColumn<node*>("current");
 	QTest::addColumn<QString>("expected");
 	
-	node *parent, *current;
-	parent = 0;
-	current = tree_alt_pattern2();
-	QTest::newRow("default1") << parent << current << QString("$1 или $2");
+	node *parent, *current; //временные переменные для заполнения таблицы
 
-	parent = tree_alt_pattern2();
-	current = parent->child(1);
-	QTest::newRow("variant1") << parent << current << QString("$1, или $2");
+	parent = tree_alt_form();
+	current = parent->child(0);
+	QTest::newRow("form") << parent << current << QString("пробельных символов");
 
 	parent = 0;
 	current = tree_alt_pattern3();
-	QTest::newRow("variant2") << parent << current << QString("$1, или $2");
+	QTest::newRow("variant") << parent << current << QString("$1, или $2");
 
 	parent = tree_alt_pattern3();
 	current = parent->child(0);
-	QTest::newRow("default2") << parent << current << QString("$1 или $2");
+	QTest::newRow("default") << parent << current << QString("$1 или $2");
+
+	parent = tree_alt_pattern4();
+	current = parent->child(0);
+	QTest::newRow("default&parent") << parent << current << QString("ссылка на подмаску $n");
 
 	parent = tree_quantifier();
 	current =  parent->child(0);
@@ -172,7 +182,7 @@ void tests::checkTest_data()
 	QTest::newRow("form accept") << parent << current << temp << true;
 
 	temp.form = "g";
-	parent = tree_alt_pattern1();
+	parent = tree_alt_pattern2();
 	current = parent->child(0);
 	QTest::newRow("form dont accept") << parent << current << temp << false;
 
