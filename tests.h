@@ -61,6 +61,22 @@ public:
 	 \enddot
 	 */
 	node * tree_alt_pattern2();
+
+	/*!
+	 Создает дерево вида:
+	 \dot
+	 digraph g{
+	 or1 [label="|"]
+	 or2 [label="|"]
+	 or1 -> or2
+	 or1 -> "c"
+	 or2 -> "a"
+	 or2 -> "b"
+	 }
+	 \enddot
+	 */
+	node * tree_alt_pattern3();
+
 	/*!
 	 Создает дерево вида:
 	 \dot
@@ -115,6 +131,18 @@ private slots:
 	 * Запуск единичного теста для node::description
 	 */
 	void descriptionTest();
+
+	/*!
+	 * Данные для тестов node::pattern (деревья/шаблоны)
+	 */
+    void patternTest_data();
+	
+	/*!
+	 * Запуск единичного теста для node::pattern
+	 */
+	void patternTest();
+
+	
 };
 
 #endif // tests_H

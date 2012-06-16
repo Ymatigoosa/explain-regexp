@@ -38,6 +38,17 @@ node * tests::tree_alt_pattern2()
 
 	return parent;
 }
+node * tests::tree_alt_pattern3()
+{
+	node * parent = new node_oor();
+
+	parent->addChild(new node_oor());
+	parent->child(0)->addChild(new node_otext(QString("a")));
+	parent->child(0)->addChild(new node_otext(QString("b")));
+	parent->addChild(new node_otext(QString("c")));
+
+	return parent;
+}
 node * tests::tree_alt_form()
 {
 	node * parent = new node_quantifier_star();
@@ -83,21 +94,53 @@ void tests::descriptionTest_data()
 
 	
 }
+
 void tests::descriptionTest()
 {
 	QFETCH(node*,root);
     QFETCH(QString,expected);
 	
 	QString result =  root->description(*patterns);
+	delete root;
 	printf("\nExpected: %s\n",qPrintable(QString(expected)));
 	printf("Returned: %s\n",qPrintable(QString(result)));	
 	QVERIFY(result==expected);	
 }
 
+void tests::patternTest_data()
+{
+	QTest::addColumn<node*>("root");
+	QTest::addColumn<QString>("expected");
+	
+	node * parent = tree_alt_pattern2();
+	QTest::newRow("default1") << parent << QString("$1 или $2");
+	parent = parent->child(1);
+	QTest::newRow("variant1") << parent << QString("$1, или $2");
+	parent = tree_alt_pattern3();
+	QTest::newRow("variant2") << parent << QString("$1, или $2");
+	parent = parent->child(0);
+	QTest::newRow("default2") << parent << QString("$1 или $2");
+	parent = tree_quantifier();
+	QTest::newRow("quantifier1") << parent->child(0) << QString("$1 $m раза");
+	QTest::newRow("quantifier2") << parent->child(1) << QString("$1 $m раз");
+}
+void tests::patternTest()
+{
+	QFETCH(node*,root);
+    QFETCH(QString,expected);
+
+	nodePattern * current_patterns =  patterns->getPatternFromType(root->type());
+	QString result = root->pattern(*current_patterns);
+	//delete root;
+	printf("\nExpected: %s\n",qPrintable(QString(expected)));
+	printf("Returned: %s\n",qPrintable(QString(result)));
+	QVERIFY(result==expected);
+}
 void tests::initTestCase()
 {
 	patterns = readPatterns(QString("patterns.xml"));
 }
+
 void tests::cleanupTestCase()
 {
 	delete patterns;
