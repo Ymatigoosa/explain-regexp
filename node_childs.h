@@ -1354,6 +1354,9 @@ public:
 	node_otext()///<конструктор по умолчанию
 	{	}
 
+	node_otext(QString & _text)
+	{ text=_text;	}
+
 	QString tagName()///<название тега
 	{	return QString("t");	}
 
