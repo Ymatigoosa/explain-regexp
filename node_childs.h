@@ -1184,6 +1184,9 @@ public:
 	node_link()///<конструктор по умолчанию
 	{	}
 
+	node_link(QString &_n)///<конструктор по умолчанию
+	{n=_n;	}
+
 	QString tagName()///<название тега
 	{	return QString("link");	}
 
