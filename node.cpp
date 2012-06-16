@@ -35,3 +35,8 @@ QString node::pattern(const nodePattern & _nodePattern, node * parent, QString f
 {
 	return QString();
 }
+
+bool node::check(const variant & pattern, node * parent)
+{
+	return false;
+}
