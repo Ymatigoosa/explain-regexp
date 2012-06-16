@@ -63,23 +63,25 @@ node * tests::tree_quantifier2()
 
 void tests::descriptionTest_data()
 {
-	 QTest::addColumn<node *>("vertex of the tree");
-	 QTest::addColumn<QString>("expected description");
+	 QTest::addColumn<node*>("root");
+	 QTest::addColumn<QString>("expected");
 
+	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
 	 QTest::newRow("standart patterns") << tree_standart_patterns() << QString("любой из символов от 0 до 9 не менее 1 раза” или “любой из символов от A до Z не менее 1 раза” или “любой из символов от a до z не менее 1 раза");
 	 QTest::newRow("quantifier1") << tree_quantifier() << QString("любой символ 2 раза” или “любой символ 112 раз");
 	 QTest::newRow("quantifier2") << tree_quantifier() << QString("любой символ 5 раз” или “любой символ 1024 раза");
 	 QTest::newRow("alt pattern1") << tree_alt_pattern1() << QString("любая последовательность символов или её отсутсвие");
-	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
+	
 }
 void tests::descriptionTest()
 {
-	QFETCH(node *, parent);
-    QFETCH(QString, expected);
+	QFETCH(node*,root);
+    QFETCH(QString,expected);
 	
-	QString result =  parent->description(*patterns);
+	QString result =  root->description(*patterns);
+	QString msg = QString("node::description returns:\n%1\nexpected:\n%2\n").arg(result).arg(expected);
 
-	QVERIFY2(result==expected,qPrintable(QString("node::description returns:\n%1\nexpected:\n%2").arg(result).arg(expected)) );
+	QVERIFY2(result==expected,qPrintable(msg) );
 }
 
 void tests::initTestCase()
