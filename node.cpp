@@ -11,7 +11,6 @@ node::~node()
 	{
 		delete childs[i];
 	}
-	delete this;
 }
 
 
@@ -28,6 +27,11 @@ node * node::child(int n)
 }
 
 QString node::description(const patternContainer & patterns, int num, node * parent, QString form)
+{
+	return QString();
+}
+
+QString node::pattern(const nodePattern & _nodePattern, node * parent, QString form)
 {
 	return QString();
 }
