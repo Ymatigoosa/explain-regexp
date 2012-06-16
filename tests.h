@@ -1,5 +1,5 @@
-#ifndef TEST_DESCRIPTION_H
-#define TEST_DESCRIPTION_H
+#ifndef tests_H
+#define tests_H
 
 #include <QObject>
 #include <QtTest/QtTest>
@@ -10,7 +10,7 @@
  * \brief Тесты node::description()
  * Класс на основе QtTest, осуществляет автоматический запуск тестов. Тестируемая функция node::description()
  */
-class test_description : public QObject
+class tests : public QObject
 {
     Q_OBJECT
 private:
@@ -43,4 +43,4 @@ private slots:
 	void descriptionTest();
 };
 
-#endif // TEST_DESCRIPTION_H
+#endif // tests_H

@@ -1,10 +1,10 @@
-#include "test_description.h"
+#include "tests.h"
 
 Q_DECLARE_METATYPE(node *)
 
 patternContainer * readPatterns(QString &filename) throw (...);
 
-node * test_description::tree_standart_patterns()
+node * tests::tree_standart_patterns()
 {
 	node * parent = new node_oor();
 	parent->addChild(new node_quantifier_plus());
@@ -23,14 +23,14 @@ node * test_description::tree_standart_patterns()
 	return parent;
 }
 
-node * test_description::tree_alt_pattern1()
+node * tests::tree_alt_pattern1()
 {
 	node * parent = new node_quantifier_star();
 	parent->addChild(new node_dot());
 
 	return parent;
 }
-node * test_description::tree_alt_form()
+node * tests::tree_alt_form()
 {
 	node * parent = new node_quantifier_star();
 	parent->addChild(new node_operand_s());
@@ -38,7 +38,7 @@ node * test_description::tree_alt_form()
 	return parent;
 }
 
-node * test_description::tree_quantifier()
+node * tests::tree_quantifier()
 {
 	node * parent = new node_oor();
 	parent->addChild(new node_quantifier_m("2"));
@@ -49,7 +49,7 @@ node * test_description::tree_quantifier()
 
 	return parent;
 }
-node * test_description::tree_quantifier2()
+node * tests::tree_quantifier2()
 {
 	node * parent = new node_oor();
 	parent->addChild(new node_quantifier_m("5"));
@@ -61,7 +61,7 @@ node * test_description::tree_quantifier2()
 	return parent;
 }
 
-void test_description::descriptionTest_data()
+void tests::descriptionTest_data()
 {
 	 QTest::addColumn<node *>("vertex of the tree");
 	 QTest::addColumn<QString>("expected description");
@@ -72,7 +72,7 @@ void test_description::descriptionTest_data()
 	 QTest::newRow("alt pattern1") << tree_alt_pattern1() << QString("любая последовательность символов или её отсутсвие");
 	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
 }
-void test_description::descriptionTest()
+void tests::descriptionTest()
 {
 	QFETCH(node *, parent);
     QFETCH(QString, expected);
@@ -82,11 +82,11 @@ void test_description::descriptionTest()
 	QVERIFY2(result==expected,qPrintable(QString("node::description returns:\n%1\nexpected:\n%2").arg(result).arg(expected)) );
 }
 
-void test_description::initTestCase()
+void tests::initTestCase()
 {
 	patterns = readPatterns(QString("patterns.xml"));
 }
-void test_description::cleanupTestCase()
+void tests::cleanupTestCase()
 {
 	delete patterns;
 }
