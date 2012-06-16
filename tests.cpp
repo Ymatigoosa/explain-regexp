@@ -109,33 +109,62 @@ void tests::descriptionTest()
 
 void tests::patternTest_data()
 {
-	QTest::addColumn<node*>("root");
+	QTest::addColumn<node*>("parent");
+	QTest::addColumn<node*>("current");
 	QTest::addColumn<QString>("expected");
 	
-	node * parent = tree_alt_pattern2();
-	QTest::newRow("default1") << parent << QString("$1 или $2");
-	parent = parent->child(1);
-	QTest::newRow("variant1") << parent << QString("$1, или $2");
+	node *parent, *current;
+	parent = 0;
+	current = tree_alt_pattern2();
+	QTest::newRow("default1") << parent << current << QString("$1 или $2");
+
+	parent = tree_alt_pattern2();
+	current = parent->child(1);
+	QTest::newRow("variant1") << parent << current << QString("$1, или $2");
+
+	parent = 0;
+	current = tree_alt_pattern3();
+	QTest::newRow("variant2") << parent << current << QString("$1, или $2");
+
 	parent = tree_alt_pattern3();
-	QTest::newRow("variant2") << parent << QString("$1, или $2");
-	parent = parent->child(0);
-	QTest::newRow("default2") << parent << QString("$1 или $2");
+	current = parent->child(0);
+	QTest::newRow("default2") << parent << current << QString("$1 или $2");
+
 	parent = tree_quantifier();
-	QTest::newRow("quantifier1") << parent->child(0) << QString("$1 $m раза");
-	QTest::newRow("quantifier2") << parent->child(1) << QString("$1 $m раз");
+	current =  parent->child(0);
+	QTest::newRow("quantifier1") << parent << current << QString("$1 $m раза");
+
+	parent = tree_quantifier();
+	current =  parent->child(1);
+	QTest::newRow("quantifier2") << parent << current << QString("$1 $m раз");
 }
 void tests::patternTest()
 {
-	QFETCH(node*,root);
+	QFETCH(node*,parent);
+	QFETCH(node*,current);
     QFETCH(QString,expected);
 
-	nodePattern * current_patterns =  patterns->getPatternFromType(root->type());
-	QString result = root->pattern(*current_patterns);
-	//delete root;
+	nodePattern * current_patterns =  patterns->getPatternFromType(current->type());
+	QString result = current->pattern(*current_patterns);
+	if(parent==0)
+		delete current;
+	else
+		delete parent;
 	printf("\nExpected: %s\n",qPrintable(QString(expected)));
 	printf("Returned: %s\n",qPrintable(QString(result)));
 	QVERIFY(result==expected);
 }
+
+void tests::checkTest_data()
+{
+
+}	
+
+void tests::checkTest()
+{
+
+}
+
 void tests::initTestCase()
 {
 	patterns = readPatterns(QString("patterns.xml"));

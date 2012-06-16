@@ -142,7 +142,15 @@ private slots:
 	 */
 	void patternTest();
 
+	/*!
+	 * Данные для тестов node::check (деревья/шаблоны)
+	 */
+    void checkTest_data();
 	
+	/*!
+	 * Запуск единичного теста для node::check
+	 */
+	void checkTest();
 };
 
 #endif // tests_H
