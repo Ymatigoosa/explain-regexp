@@ -155,8 +155,8 @@ void tests::patternTest()
 	QFETCH(node*,current);
     QFETCH(QString,expected);
 
-	nodePattern * current_patterns =  patterns->getPatternFromType(current->type());
-	QString result = current->pattern(*current_patterns);
+	nodePattern current_patterns =  patterns->getPatternFromType(current->type());
+	QString result = current->pattern(current_patterns);
 	if(parent==0)
 		delete current;
 	else
