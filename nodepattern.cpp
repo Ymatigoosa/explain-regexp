@@ -2,4 +2,5 @@
 
 nodePattern::nodePattern()
 {
+	defaultPattern = NULL;
 }
