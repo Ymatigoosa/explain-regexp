@@ -10,6 +10,7 @@ class nodePattern
 {
 public:
     nodePattern();
+	nodePattern(const nodePattern &);
 
 	QString * defaultPattern; //!< стандартный шаблон;
 	QList<variant *> variantPatterns; //!< список альтернативных шаблонов.
