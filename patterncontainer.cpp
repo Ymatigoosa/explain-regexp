@@ -3,11 +3,6 @@
 patternContainer::patternContainer()
 {
 }
-nodePattern * patternContainer::getPatternFromType(nodeType type)
-{
-	static nodePattern a;
-	return &a;
-}
 
 void patternContainer::addDefault(QString &tag, QString pattern)
 {
@@ -36,6 +31,8 @@ void patternContainer::addDefault(QString &tag, QString pattern)
 
 void patternContainer::addVariant(variant item)
 {
+	if(item.type == 0)
+		return;//шаблон не пригоден ни для одного узла
 	const QMap<QString,nodeType> &_tags=buildTagsMap(); //карта: тег-тип
 	nodeType _currentType;
 	variant *_variantPointer;	//указатель на альтернативный шаблон в массиве
@@ -62,4 +59,9 @@ void patternContainer::addVariant(variant item)
 		}
 		++i;
 	}
+}
+
+nodePattern patternContainer::getPatternFromType(nodeType type)
+{
+	return nodePatterns[type];
 }

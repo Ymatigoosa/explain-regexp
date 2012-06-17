@@ -37,9 +37,9 @@ public:
 	/*!
 	 *  возвращает список шаблонов для текущего узла
 	 * \param[in] type требуемый тип узла
-	 * \return ссылка на список шаблонов из контейнера nodePatterns
+	 * \return список шаблонов из контейнера nodePatterns
 	 */
-	nodePattern * getPatternFromType(nodeType type);
+	nodePattern getPatternFromType(nodeType type);
 };
 
 #endif // PATTERNCONTAINER_H
