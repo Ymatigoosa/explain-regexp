@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<patterns>
+  <default type="kmn">$1 от $m до $n раз</default>
+  <default type="km">$1 $m раз</default>
+</patterns>

@@ -113,28 +113,29 @@ variant QDomElementToVariant(const QDomElement &currentElement)
 {
 	const QMap<QString,nodeType> & tags = buildTagsMap();
 	QMap<QString,nodeType>::iterator i;
-	QRegExp re_type,re_parentType,re_child1Type,re_child2Type,re_child3Type,re_childType;	//реглярные выражения
+	QStringList re_type,re_parentType,re_child1Type,re_child2Type,re_child3Type,re_childType;	//список допустимых тегов
 	variant t_variant;//временная переменная для формированая альтернативного шаблона
 	QString currentTag;
 	nodeType currentType;
 
 	//формируем структуру variant
 	
-	re_type.setPattern(currentElement.attribute("type"));//регулярное выражение для доступных типов
-	re_parentType.setPattern(currentElement.attribute("parent-type"));//регулярное выражение для доступных типов родителя
-	re_child1Type.setPattern(currentElement.attribute("child1-type"));//регулярное выражение для доступных первого ребенка
-	re_child2Type.setPattern(currentElement.attribute("child2-type"));//регулярное выражение для доступных первого ребенка
-	re_child3Type.setPattern(currentElement.attribute("child3-type"));//регулярное выражение для доступных первого ребенка
-	re_childType.setPattern(currentElement.attribute("child-type"));//регулярное выражение для доступных любого ребенка
+	re_type = currentElement.attribute("type").split('|');//регулярное выражение для доступных типов
+	re_parentType = currentElement.attribute("parent-type").split('|');//регулярное выражение для доступных типов родителя
+	re_child1Type = currentElement.attribute("child1-type").split('|');//регулярное выражение для доступных первого ребенка
+	re_child2Type = currentElement.attribute("child2-type").split('|');//регулярное выражение для доступных первого ребенка
+	re_child3Type = currentElement.attribute("child3-type").split('|');//регулярное выражение для доступных первого ребенка
+	re_childType = currentElement.attribute("child-type").split('|');//регулярное выражение для доступных любого ребенка
 
 	t_variant.content = currentElement.attribute("content");//поле content заполнено
 	t_variant.parentContent = currentElement.attribute("parent-content");//поле parent-content заполнено
-	t_variant.childiContent[0] = currentElement.attribute("child1-content");//поле child1-content заполнено
-	t_variant.childiContent[1] = currentElement.attribute("child2-content");//поле child2-content заполнено
-	t_variant.childiContent[2] = currentElement.attribute("child3-content");//поле child3-content заполнено
+	t_variant.childiContent << currentElement.attribute("child1-content");//поле child1-content заполнено
+	t_variant.childiContent << currentElement.attribute("child2-content");//поле child2-content заполнено
+	t_variant.childiContent << currentElement.attribute("child3-content");//поле child3-content заполнено
 	t_variant.form = currentElement.attribute("form");//поле form заполнено
 	t_variant.m = currentElement.attribute("m");//поле m заполнено
 	t_variant.n = currentElement.attribute("n");//поле n заполнено
+	t_variant.pattern = currentElement.text();
 
 	i=QMap<QString,nodeType>::iterator(tags.begin());//инициализуем итератор
 	while(i != tags.end()) 
@@ -143,22 +144,22 @@ variant QDomElementToVariant(const QDomElement &currentElement)
 		currentType = i.value();
 
 		//заполнение структуры type
-		if(re_type.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута type
+		if(re_type.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута type
 			t_variant.type = t_variant.type | currentType;
 		
-		if(!re_parentType.isEmpty() && re_parentType.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута parent-type
+		if(!re_parentType.isEmpty() && re_parentType.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута parent-type
 			t_variant.parentType = t_variant.parentType | currentType;
 
-		if(!re_child1Type.isEmpty() && re_child1Type.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута child1-type
+		if(!re_child1Type.isEmpty() && re_child1Type.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута child1-type
 			t_variant.childiType[0] = t_variant.childiType[0] | currentType;
 
-		if(!re_child2Type.isEmpty() && re_child2Type.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута child2-type
+		if(!re_child2Type.isEmpty() && re_child2Type.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута child2-type
 			t_variant.childiType[1] = t_variant.childiType[1] | currentType;
 
-		if(!re_child3Type.isEmpty() && re_child3Type.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута child3-type
+		if(!re_child3Type.isEmpty() && re_child3Type.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута child3-type
 			t_variant.childiType[2] = t_variant.childiType[2] | currentType;
 
-		if(!re_childType.isEmpty() && re_childType.indexIn(currentTag)!=-1)//значит тег есть в описании атрибута child-type
+		if(!re_childType.isEmpty() && re_childType.indexOf(currentTag)!=-1)//значит тег есть в описании атрибута child-type
 			t_variant.childType = t_variant.childType | currentType;
 
 		++i;
@@ -173,7 +174,7 @@ variant QDomElementToVariant(const QDomElement &currentElement)
  * \return Контейнер шаблонов (память выделяется динамически!)
  * \throw char* строка с ошибкой
  */
-patternContainer * readPatterns(QString &filename) throw (char *)
+patternContainer * readPatterns(QString &filename) throw (QString)
 {
 	patternContainer * data = new patternContainer();
 	const QMap<QString,nodeType> & tags = buildTagsMap();
@@ -181,7 +182,7 @@ patternContainer * readPatterns(QString &filename) throw (char *)
 
 	QFile file(filename);					//открывает файл с шаблонами
 	if (!file.open(QIODevice::ReadOnly))	//проверка
-		throw "file open errror";			//выходим при ошибке
+		throw QString("file open errror");			//выходим при ошибке
 
 	QDomDocument domDocument;				//для разбора xml
 	QString errorStr;						//текст ошибки xml
@@ -189,10 +190,12 @@ patternContainer * readPatterns(QString &filename) throw (char *)
 
 	if (!domDocument.setContent(&file, false, &errorStr, &errorLine, &errorColumn)) //устанавливаем контекст
 	{
-         throw qPrintable(QString("Parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr));//выталкиваем ошибку
+		errorStr = QString("Parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr);
+		throw  errorStr;//выталкиваем ошибку
 	}
 
-	QDomNode n = domDocument.firstChild();	//n - ребенок по порядку
+	QDomElement rootElement = domDocument.documentElement();
+	QDomNode n = rootElement.firstChild();	//n - ребенок по порядку
 	while (!n.isNull()) 
 	{
 		if (n.isElement()) 
@@ -237,9 +240,9 @@ int main(int argc, char *argv[])
 		tests t1;
 		QTest::qExec(&t1);
 	}
-	catch(char * s)
+	catch(QString s)
 	{
-		qDebug("EXEPTION: %s!",s); 
+		qDebug("EXEPTION: %s!",qPrintable(s)); 
 	}
 
     return a.exec();
