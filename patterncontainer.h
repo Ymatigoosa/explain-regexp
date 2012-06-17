@@ -5,6 +5,9 @@
 #include "nodepattern.h"
 #include <QStringList>
 #include <QMap>
+
+const QMap<QString,nodeType> & buildTagsMap();
+
 /*!
  * \brief Класс, содержащий список всех шаблонов
  * Класс, содержащий список всех шаблонов с возможность получения набора шаблонов для определенного тега
