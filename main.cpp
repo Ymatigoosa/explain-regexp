@@ -106,7 +106,7 @@ const QMap<QString,nodeType> & buildTagsMap()
 /*!
  * Формирует структуру variant из QDomElement
  * \pre тег элемента не проверяется и атрибут type должен присутсвовать
- * \param[in] currentElemen имя файла содержащего список шаблонов
+ * \param[in] currentElement имя файла содержащего список шаблонов
  * \return альтернативный шаблон (структура \ref variant)
  */
 variant QDomElementToVariant(const QDomElement &currentElement)
