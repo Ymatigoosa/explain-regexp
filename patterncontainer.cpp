@@ -11,7 +11,7 @@ nodePattern * patternContainer::getPatternFromType(nodeType type)
 
 void patternContainer::addDefault(QString &tag, QString pattern)
 {
-	const QMap<QString,nodeType> &_tags=buildTagsMap();
+	const QMap<QString,nodeType> &_tags=buildTagsMap();//карта: тег-тип
 	nodeType _currentType;
 	QString *_defaultPointer;		//указатель на стандартный шаблон в массиве
 
@@ -36,5 +36,30 @@ void patternContainer::addDefault(QString &tag, QString pattern)
 
 void patternContainer::addVariant(variant item)
 {
+	const QMap<QString,nodeType> &_tags=buildTagsMap(); //карта: тег-тип
+	nodeType _currentType;
+	variant *_variantPointer;	//указатель на альтернативный шаблон в массиве
 
+	allVariants.append(item);	//добавляем в массив альтернативных шаблонов
+	_variantPointer = &(allVariants.last()); //получаем уазатель на добавленную структуру
+
+	QMap<QString,nodeType>::iterator i=_tags.begin();
+	while(i != _tags.end()) 
+	{
+		_currentType = i.value();// запонимаем текущий тип
+		if((_currentType & item.type) != 0) //если шаблон применим для текущего типа
+		{
+			if(nodePatterns.contains(_currentType)) //если для текущего типа структура уже определена
+			{
+				nodePatterns[_currentType].variantPatterns.append(_variantPointer);//пишем в нее переданный шаблон
+			}
+			else	//иначе создаем новую структуры и добавляем в массив
+			{
+				nodePattern _newNodePattern;
+				_newNodePattern.variantPatterns.append(_variantPointer);
+				nodePatterns.insert(_currentType, _newNodePattern);
+			}
+		}
+		++i;
+	}
 }
