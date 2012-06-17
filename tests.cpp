@@ -244,6 +244,27 @@ void tests::hasArgTest()
 	QVERIFY(result==expected);
 }
 
+void tests::postprocessingTest_data()
+{
+	QTest::addColumn<QString>("str");
+	QTest::addColumn<QString>("expected");
+
+	QTest::newRow("comma") << QString("a,, или b") << QString("a, или b") ;
+	QTest::newRow("brackets") << QString("(a или (b))") << QString("(a или (b) )") ;
+	QTest::newRow("space") << QString(" a    или b   ") << QString("a или b") ;
+	QTest::newRow("all") << QString(" (a    или,, (b)   )") << QString("(a или, (b))") ;
+}
+	
+void tests::postprocessingTest()
+{
+	QFETCH(QString,str);
+	QFETCH(QString,expected);
+	
+	printf("\nExpected: %s\n",qPrintable(QString(expected)));
+	printf("Returned: %s\n",qPrintable(QString(str)));
+	QVERIFY(str==expected);
+}
+
 void tests::initTestCase()
 {
 	patterns = readPatterns(QString("patterns.xml"));

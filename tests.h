@@ -6,6 +6,8 @@
 #include "node.h"
 #include "node_childs.h"
 
+void postprocessing(QString * str);
+
 /*!
  * \brief Тесты 
  * Класс на основе QtTest, осуществляет автоматический запуск тестов. Тестируемые функции node::description(), node::pattern(), node::hasArg(), node::check()
@@ -180,6 +182,16 @@ private slots:
 	 * Запуск единичного теста для node::hasArg
 	 */
 	void hasArgTest();
+
+	/*!
+	 * Данные для тестов postprocessing (строки/результат)
+	 */
+    void postprocessingTest_data();
+	
+	/*!
+	 * Запуск единичного теста для postprocessing
+	 */
+	void postprocessingTest();
 };
 
 #endif // tests_H
