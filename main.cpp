@@ -5,7 +5,7 @@
 #include <QtCore/QCoreApplication>
 #include "nodeType.h"
 #include "patterncontainer.h"
-#include <tests.h>
+#include "tests.h"
 #include <QDomNode>
 #include <qfile.h>
 #include <QMap>
@@ -182,7 +182,7 @@ patternContainer * readPatterns(QString &filename) throw (QString)
 
 	QFile file(filename);					//открывает файл с шаблонами
 	if (!file.open(QIODevice::ReadOnly))	//проверка
-		throw QString("file open errror");			//выходим при ошибке
+		throw QString("pattern-file open errror");			//выходим при ошибке
 
 	QDomDocument domDocument;				//дл€ разбора xml
 	QString errorStr;						//текст ошибки xml
@@ -190,8 +190,7 @@ patternContainer * readPatterns(QString &filename) throw (QString)
 
 	if (!domDocument.setContent(&file, false, &errorStr, &errorLine, &errorColumn)) //устанавливаем контекст
 	{
-		errorStr = QString("Parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr);
-		throw  errorStr;//выталкиваем ошибку
+		throw  QString("pattern-xml parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr);//выталкиваем ошибку
 	}
 
 	QDomElement rootElement = domDocument.documentElement();
@@ -212,6 +211,46 @@ patternContainer * readPatterns(QString &filename) throw (QString)
 		n = n.nextSibling();	//следущий ребенок
 	}
 	return data;
+}
+
+/*!
+ *\brief генерирует узел на основе содержимого xml узла
+ *Ќа основе xml дерева формирует соответствующее дерево регул€рного выражени€.  ¬ зависимости от тега создает узел определенного типа и передает  xmlnode вконструктор узла. ¬ызывает сама себ€ дл€ создани€ дочерних узлов. 
+ *\param[in] xmlnode узел xml дерева, дл€ которого выполн€етс€ преобразование
+ *\return указатель на созданный узел
+ */
+node * readNode(const QDomNode & xmlnode)
+{
+	static node_oor abc;
+	return &abc;
+}
+
+/*!
+ *\brief —читывает дерево из файла
+ *„итает XML файл в виде DOM и формирует соответствующее дерево в пам€ти. ¬озвращает NULL в случае ошибки и выводит предупреждение на консоль. 
+ *\param[in] filename  им€ файла
+ *\return ссылка на верхний узел дерева
+ */
+node* readTree (QString &filename)
+{
+	static node_oor abc;
+	return &abc;
+
+	QFile file(filename);					//открывает файл с шаблонами
+	if (!file.open(QIODevice::ReadOnly))	//проверка
+		throw QString("tree-file open errror");			//выходим при ошибке
+	QDomDocument domDocument;				//дл€ разбора xml
+	QString errorStr;						//текст ошибки xml
+	int errorLine,errorColumn;
+
+	if (!domDocument.setContent(&file, false, &errorStr, &errorLine, &errorColumn)) //устанавливаем контекст
+	{
+		throw  QString("tree-xml parse error at line %1, column %2:\n%3").arg(errorLine).arg(errorColumn).arg(errorStr);//выталкиваем ошибку
+	}
+
+	QDomElement rootElement = domDocument.documentElement();
+	QDomNode n = rootElement.firstChild();	//n - ребенок по пор€дку
+	return readNode(n);
 }
 
 /*!
@@ -239,6 +278,9 @@ int main(int argc, char *argv[])
 		//запуск тестов
 		tests t1;
 		QTest::qExec(&t1);
+		puts( qPrintable(QString("русский текст")));
+		qDebug("%s",qPrintable(QString("русский текст")));
+		//qDebug("%s",dfsdf);
 	}
 	catch(QString s)
 	{

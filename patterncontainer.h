@@ -15,8 +15,8 @@ const QMap<QString,nodeType> & buildTagsMap();
 class patternContainer
 {
 public:
-	QStringList defaults; ///<список стандартных шаблонов, 
-    QList<variant> allVariants; ///<список альтернативных шаблонов
+	//QStringList defaults; ///<список стандартных шаблонов, 
+    //QList<variant> allVariants; ///<список альтернативных шаблонов
 	QMap<nodeType,nodePattern> nodePatterns;///<список шаблонов по тегам, ключ – тип узла, значение – список шаблонов.
 	
 	patternContainer();	///<конструктор по умолчанию

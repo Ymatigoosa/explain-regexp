@@ -12,8 +12,8 @@ public:
     nodePattern();
 	nodePattern(const nodePattern &);
 
-	QString * defaultPattern; //!< стандартный шаблон;
-	QList<variant *> variantPatterns; //!< список альтернативных шаблонов.
+	QString  defaultPattern; //!< стандартный шаблон;
+	QList<variant> variantPatterns; //!< список альтернативных шаблонов.
 };
 
 #endif // NODEPATTERN_H

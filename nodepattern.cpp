@@ -2,7 +2,6 @@
 
 nodePattern::nodePattern()
 {
-	defaultPattern = NULL;
 }
 nodePattern::nodePattern(const nodePattern &_other)
 {
