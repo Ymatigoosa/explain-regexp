@@ -2,4 +2,145 @@
 <patterns>
   <default type="kmn">$1 от $m до $n раз</default>
   <default type="km">$1 $m раз</default>
+  <variant type="km" m="[2-9]*[2-4]">$1 $m раза</variant>
+  <default type="kxn">$1 не более $n раз</default>
+  <default type="kmx">$1 не менее $m раз</default>
+  <default type="ks">любое количество или отсутствие $1g</default>
+  <variant type="ks" child-type="dot">любая последовательность символов или её отсутсвие</variant>
+  <default type="kp">любое количество $1g</default>
+  <variant type="kp" child-type="dot">любая последовательность символов</variant>
+  <default type="kq">есть или нет $1</default>
+
+  <default type="kmnp">$1 от $m до $n раз (жадный квантификатор)</default>
+  <default type="kmp">$1 $m раз (жадный квантификатор)</default>
+  <variant type="kmp" m="[2-9]*[2-4]">$1 $m раза (жадный квантификатор)</variant>
+  <default type="kxnp">$1 не более $n раз (жадный квантификатор)</default>
+  <default type="kmxp">$1 не менее $m раз (жадный квантификатор)</default>
+  <default type="ksp">любое количество или отсутствие $1g (жадный квантификатор)</default>
+  <variant type="ksp" child-type="dot">любая последовательность символов или её отсутсвие (жадный квантификатор)</variant>
+  <default type="kpp">любое количество $1g (жадный квантификатор)</default>
+  <variant type="kpp" child-type="dot">любая последовательность символов (жадный квантификатор)</variant>
+  <default type="kqp">есть или нет $1 (жадный квантификатор)</default>
+
+  <default type="kmnq">$1 от $m до $n раз (нежадный квантификатор)</default>
+  <default type="kmq">$1 $m раз (нежадный квантификатор)</default>
+  <variant type="kmq" m="[2-9]*[2-4]">$1 $m раза (нежадный квантификатор)</variant>
+  <default type="kxnq">$1 не более $n раз (нежадный квантификатор)</default>
+  <default type="kmxq">$1 не менее $m раз (нежадный квантификатор)</default>
+  <default type="ksq">любое количество или отсутствие $1g (нежадный квантификатор)</default>
+  <variant type="ksq" child-type="dot">любая последовательность символов или её отсутсвие (нежадный квантификатор)</variant>
+  <default type="kpq">любое количество $1g (нежадный квантификатор)</default>
+  <variant type="kpq" child-type="dot">любая последовательность символов (нежадный квантификатор)</variant>
+  <default type="kqq">есть или нет $1 (нежадный квантификатор)</default>
+
+  <default type="con">$1 затем $2</default>
+  <variant type="con" child-type="cf|cfn|cb|cbn">$1 $2</variant>
+  <variant type="con" child1-type="con">$1, затем $2</variant>
+
+  <default type="or">$1 или $2</default>
+  <variant type="or" child1-type="con">$1, или $2</variant>
+
+  <default type="g">подмаска №$X: "$1"</default>
+  <variant type="g" form="g">подмасок №$X: “$1”</variant>
+
+  <default type="gq">группировка: "$1"</default>
+  <variant type="gq" form="g">группировок: "$1"</variant>
+
+  <default type="go">однократная подмаска: "$1"</default>
+  <variant type="go" form="g">однократных подмасок: "$1"</variant>
+
+  <default type="cm">если условие $1 верно, то проверить шаблон "$2" иначе "$3"</default>
+  <variant type="cm" child-type="link">если подмаска №$1 успешно сопоставлена, то проверить шаблон "$2" иначе "$3"</variant>
+
+  <default type="cmy">если подмаска $1 успешно сопоставлена, то проверить шаблон "$2"</default>
+  <variant type="cmy" child-type="link">если подмаска №$1 успешно сопоставлена, то проверить шаблон "$2"</variant>
+
+  <default type="cf">текст далее должен соответствовать "$1",</default>
+  <default type="cfn">текст далее не должен соответствовать "$1",</default>
+  <default type="cb">предшествующий текст должен соответствовать "$1",</default>
+  <default type="cbn">предшествующий текст не должен соответствовать "$1",</default>
+
+  <!--Операнды -->
+  <default type="mi">не учитывать регистр;</default>
+  <default type="ms">точка = все символы, включая \n;</default>
+  <default type="mu">квантификаторы нежадные;</default>
+  <default type="mm">\А, $ учитывают \n;</default>
+  
+  <default type="ad">начало строки</default>
+  <variant type="ad" form="g">начал строки</variant>
+
+  <default type="ac">конец строки</default>
+  <variant type="ac" form="g">концов строки</variant>
+
+  <default type="ab">граница слова</default>
+  <variant type="ab" form="g">границ слова</variant>
+
+  <default type="abb">не граница слова</default>
+  <variant type="abb" form="g">не границ слова</variant>
+
+  <default type="aab">начало текста</default>
+  <variant type="aab" form="g">начал текста</variant>
+
+  <default type="azb">конец текста или знак перевода строки</default>
+  <variant type="azb" form="g">концов текста или переводов строки</variant>
+
+  <default type="az">конец текста</default>
+  <variant type="az" form="g">концов текста</variant>
+
+  <default type="od">цифровой символ</default>
+  <variant type="od" form="g">цифровых символов</variant>
+
+  <default type="odb">НЕцифровой символ</default>
+  <variant type="odb" form="g">НЕцифровых символов</variant>
+
+  <default type="os">пробельный символ</default>
+  <variant type="os" form="g">пробельных символов</variant>
+
+  <default type="osb">НЕпробельный символ</default>
+  <variant type="osb" form="g">НЕпробельных символов</variant>
+
+  <default type="ow">алфавитно-цифровой символ</default>
+  <variant type="ow" form="g">алфавитно-цифровых символов</variant>
+
+  <default type="owb">НЕалфавитно-цифровой символ</default>
+  <variant type="owb" form="g">НЕалфавитно-цифровых символов</variant>
+
+  <default type="dot">любой символ</default>
+  <variant type="dot" form="g">любых символов</variant>
+
+  <default type="sc">любой из символов $ text</default>
+  <variant type="sc" form="g">любых из символов $text</variant>
+
+  <default type="scn">любой из символов кроме $text</default>
+  <variant type="scn" form="g">любых из символов кроме $text</variant>
+
+  <default type="range">от $start до $end</default>
+  <default type="symbol">$text</default>
+
+  <default type="link">ссылка на подмаску $n</default>
+  <variant type="link" parent-type="cm|cmy">$n</variant>
+  <variant type="link" form="g">ссылок на подмаску $n</variant>
+
+  <default type="oa">символ BEL (07 в ASCII)</default>
+  <variant type="oa" form="g">символов BEL (07 в ASCII)</variant>
+
+  <default type="oe">символ escape (hex IB в ASCII)</default>
+  <variant type="oe" form="g">символов escape (hex IB в ASCII)</variant>
+
+  <default type="on">символ перевода строки (hex OA в ASCII)</default>
+  <variant type="on" form="g">символов перевода строки (hex OA в ASCII)</variant>
+
+  <default type="ot">символ табуляции (hex 09 в ASCII)</default>
+  <variant type="ot" form="g">символов табуляции (hex 09 в ASCII)</variant>
+
+  <default type="o8">символ с восьмеричным кодом $n</default>
+  <variant type="o8" form="g">символов с восьмеричным кодом $n</variant>
+
+  <default type="o16">символ с шестнадцатеричным кодом $n</default>
+  <variant type="o16" form="g">символов с шестнадцатиричным кодом $n</variant>
+
+  <default type="empty">пустая строка</default>
+  <variant type="empty" form="g">пустых строк</variant>
+
+  <default type="t">“$text”</default>
 </patterns>
