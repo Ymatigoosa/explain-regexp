@@ -27,16 +27,13 @@ node * tests::tree_alt_pattern2()
 
 	parent->addChild(new node_oor());
 	parent->child(0)->addChild(new node_quantifier_plus());
-	parent->child(0)->child(0)->addChild(new node_symbol_class());
-	parent->child(0)->child(0)->child(0)->addChild(new node_range("A","Z"));
+	parent->child(0)->child(0)->addChild(new node_symbol_class("A-Z"));
 
 	parent->child(0)->addChild(new node_quantifier_plus());
-	parent->child(0)->child(1)->addChild(new node_symbol_class());
-	parent->child(0)->child(1)->child(0)->addChild(new node_range("a","z"));
+	parent->child(0)->child(1)->addChild(new node_symbol_class("a-z"));
 
 	parent->addChild(new node_quantifier_plus());
-	parent->child(1)->addChild(new node_symbol_class());
-	parent->child(1)->child(0)->addChild(new node_range("0","9"));
+	parent->child(1)->addChild(new node_symbol_class("0-9"));
 
 	return parent;
 }
@@ -260,9 +257,9 @@ void tests::postprocessingTest()
 	QFETCH(QString,str);
 	QFETCH(QString,expected);
 	
-	printf("\nExpected: %s\n",qPrintable(QString(expected)));
-	printf("Returned: %s\n",qPrintable(QString(str)));
-	QVERIFY(str==expected);
+	//printf("\nExpected: %s\n",qPrintable(QString(expected)));
+	//printf("Returned: %s\n",qPrintable(QString(str)));
+	QCOMPARE(str,expected);
 }
 
 void tests::initTestCase()

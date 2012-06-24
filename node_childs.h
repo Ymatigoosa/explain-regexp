@@ -17,8 +17,6 @@ public:
 	QString m;
 	QString n;
 
-	node_quantifier_mn()///<конструктор по умолчанию
-	{	}
 	node_quantifier_mn(QString _m,QString _n)
 	{ m=_m;n=_n;	}
 
@@ -41,8 +39,6 @@ class node_quantifier_m :	public node
 public:
 	QString m;
 
-	node_quantifier_m()///<конструктор по умолчанию
-	{	}
 	node_quantifier_m(QString _m)
 	{ m=_m;	}
 
@@ -63,8 +59,9 @@ class node_quantifier_0n :	public node
 public:
 	QString n;
 
-	node_quantifier_0n()///<конструктор по умолчанию
-	{	}
+
+	node_quantifier_0n(QString _n)///<конструктор по умолчанию
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("kxn");	}
@@ -85,8 +82,8 @@ class node_quantifier_m0 :	public node
 public:
 	QString m;
 
-	node_quantifier_m0()///<конструктор по умолчанию
-	{	}
+	node_quantifier_m0(QString _m)
+	{	m=_m;}
 
 	QString tagName()///<название тега
 	{	return QString("kmx");	}
@@ -168,8 +165,8 @@ public:
 	QString n;
 	QString m;
 
-	node_quantifier_mn_plus()///<конструктор по умолчанию
-	{	}
+	node_quantifier_mn_plus(QString _m,QString _n)
+	{	m=_m;n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("kmnp");	}
@@ -190,8 +187,8 @@ class node_quantifier_m_plus :	public node
 public:
 	QString m;
 
-	node_quantifier_m_plus()///<конструктор по умолчанию
-	{	}
+	node_quantifier_m_plus(QString _m)
+	{	m=_m;}
 
 	QString tagName()///<название тега
 	{	return QString("kmp");	}
@@ -212,8 +209,8 @@ class node_quantifier_0n_plus :	public node
 public:
 	QString n;
 
-	node_quantifier_0n_plus()///<конструктор по умолчанию
-	{	}
+	node_quantifier_0n_plus(QString _n)
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("kxnp");	}
@@ -234,8 +231,8 @@ class node_quantifier_m0_plus :	public node
 public:
 	QString m;
 
-	node_quantifier_m0_plus()///<конструктор по умолчанию
-	{	}
+	node_quantifier_m0_plus(QString _m)
+	{	m=_m;}
 
 	QString tagName()///<название тега
 	{	return QString("kmxp");	}
@@ -317,8 +314,8 @@ public:
 	QString n;
 	QString m;
 
-	node_quantifier_mn_question()///<конструктор по умолчанию
-	{	}
+	node_quantifier_mn_question(QString _m,QString _n)
+	{	m=_m;n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("kmnq");	}
@@ -339,8 +336,8 @@ class node_quantifier_m_question :	public node
 public:
 	QString m;
 
-	node_quantifier_m_question()///<конструктор по умолчанию
-	{	}
+	node_quantifier_m_question(QString _m)
+	{	m=_m;}
 
 	QString tagName()///<название тега
 	{	return QString("kmq");	}
@@ -361,8 +358,8 @@ class node_quantifier_0n_question :	public node
 public:
 	QString n;
 
-	node_quantifier_0n_question()///<конструктор по умолчанию
-	{	}
+	node_quantifier_0n_question(QString _n)
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("kxnq");	}
@@ -383,8 +380,8 @@ class node_quantifier_m0_question :	public node
 public:
 	QString m;
 
-	node_quantifier_m0_question()///<конструктор по умолчанию
-	{	}
+	node_quantifier_m0_question(QString _m)///<конструктор по умолчанию
+	{	m=_m;}
 
 	QString tagName()///<название тега
 	{	return QString("kmxq");	}
@@ -1069,62 +1066,6 @@ public:
 };
 
 /*!
- * \brief Узел: [symb]
- * Класс для определения узла типа [symb]
- */
-class node_symbol_class :	public node
-{
-public:
-	QString text;
-
-	node_symbol_class()///<конструктор по умолчанию
-	{	}
-
-	QString tagName()///<название тега
-	{	return QString("sc");	}
-
-	nodeType type()///<тип 
-	{	return symbol_class;	}
-
-	bool hasArg(QString & arg)
-	{	return (arg==QString("text")) ? true : false;	}
-
-	/*!
-	 * Разбирает текст аргумента text и на основе содержимого порождает потомков
-	 * \param[in] text аргумент text тега sc
-	 */
-	void buildChildsFromText(QString &text);
-};
-
-/*!
- * \brief Узел: [^symb]
- * Класс для определения узла типа [^symb]
- */
-class node_symbol_class_negative :	public node
-{
-public:
-	QString text;
-
-	node_symbol_class_negative()///<конструктор по умолчанию
-	{	}
-
-	QString tagName()///<название тега
-	{	return QString("scn");	}
-
-	nodeType type()///<тип 
-	{	return symbol_class_negative;	}
-
-	bool hasArg(QString & arg)
-	{	return (arg==QString("text")) ? true : false;	}
-
-	/*!
-	 * Разбирает текст аргумента text и на основе содержимого порождает потомков
-	 * \param[in] text аргумент text тега sc
-	 */
-	void buildChildsFromText(QString &text);
-};
-
-/*!
  * \brief Узел: a-z(внутри [ ])
  * Класс для определения узла типа a-z(внутри [ ])
  */
@@ -1133,9 +1074,6 @@ class node_range :	public node
 public:
 	QString start;
 	QString end;
-
-	node_range()///<конструктор по умолчанию
-	{	}
 
 	node_range(QString _start,QString _end)
 	{ start=_start;	end=_end;	}
@@ -1159,8 +1097,8 @@ class node_symbol :	public node
 public:
 	QString text;
 
-	node_symbol()///<конструктор по умолчанию
-	{	}
+	node_symbol(QString _text)
+	{	text=_text;}
 
 	QString tagName()///<название тега
 	{	return QString("symbol");	}
@@ -1173,6 +1111,68 @@ public:
 };
 
 /*!
+ * \brief Узел: [symb]
+ * Класс для определения узла типа [symb]
+ */
+class node_symbol_class :	public node
+{
+public:
+
+	node_symbol_class(QString text)
+	{
+		int _size = text.size();
+		for(int i=0;i<_size;++i)
+		{
+			if(i+3<=_size && text[i+1]=='-')
+				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));
+			else
+				this->addChild(new node_symbol(QString(text[i])));
+		}
+	}
+
+	QString tagName()///<название тега
+	{	return QString("sc");	}
+
+	nodeType type()///<тип 
+	{	return symbol_class;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text")) ? true : false;	}
+
+};
+
+/*!
+ * \brief Узел: [^symb]
+ * Класс для определения узла типа [^symb]
+ */
+class node_symbol_class_negative :	public node
+{
+public:
+
+	node_symbol_class_negative(QString text)
+	{
+		int _size = text.size();
+		for(int i=0;i<_size;++i)
+		{
+			if(i+3<=_size && text[i+1]=='-')
+				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));
+			else
+				this->addChild(new node_symbol(QString(text[i])));
+		}
+	}
+
+	QString tagName()///<название тега
+	{	return QString("scn");	}
+
+	nodeType type()///<тип 
+	{	return symbol_class_negative;	}
+
+	bool hasArg(QString & arg)
+	{	return (arg==QString("text")) ? true : false;	}
+
+};
+
+/*!
  * \brief Узел: \\n (1 до 99)
  * Класс для определения узла типа \\n (1 до 99)
  */
@@ -1181,11 +1181,8 @@ class node_link :	public node
 public:
 	QString n;
 
-	node_link()///<конструктор по умолчанию
-	{	}
-
-	node_link(QString &_n)///<конструктор по умолчанию
-	{n=_n;	}
+	node_link(QString _n)
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("link");	}
@@ -1290,8 +1287,8 @@ class node_operand_8 :	public node
 public:
 	QString n;
 
-	node_operand_8()///<конструктор по умолчанию
-	{	}
+	node_operand_8(QString _n)
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("o8");	}
@@ -1312,8 +1309,8 @@ class node_operand_16 :	public node
 public:
 	QString n;
 
-	node_operand_16()///<конструктор по умолчанию
-	{	}
+	node_operand_16(QString _n)
+	{	n=_n;}
 
 	QString tagName()///<название тега
 	{	return QString("o16");	}
@@ -1354,10 +1351,7 @@ class node_otext :	public node
 public:
 	QString text;
 
-	node_otext()///<конструктор по умолчанию
-	{	}
-
-	node_otext(QString & _text)
+	node_otext(QString _text)
 	{ text=_text;	}
 
 	QString tagName()///<название тега

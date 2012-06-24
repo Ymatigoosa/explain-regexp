@@ -12,6 +12,7 @@
 #include <QTextCodec>
 #include <clocale>
 
+
 /*!
  *\mainpage explain-regexp Главная страница
  *\section Алгоритм
@@ -26,6 +27,71 @@
  *Для каждого узла определяется класс потомок, который переопределяет методы, возвращающие тип и тег, а также могут переопределить методы генерации описания
  *\ref nodeType - список типов узлов, i пункт списка имеет значение 2^i для реализации битовых флажков для допустимых типов шаблона.
  */
+
+//тег,тип,атрибут1,атрибут2;
+//"kmn",quantifier_mn,"m","n";
+//"km",quantifier_m,"m";
+//"kxn",quantifier_0n,"n";
+//"kmx",quantifier_m0,"m";
+//"ks",quantifier_star;
+//"kp",quantifier_plus;
+//"kq",quantifier_question;
+//"kmnp",quantifier_mn_plus,"m","n";
+//"kmp",quantifier_m_plus,"m";
+//"kxnp",quantifier_0n_plus,"n";
+//"kmxp",quantifier_m0_plus,"m";
+//"ksp",quantifier_star_plus;
+//"kpp",quantifier_plus_plus;
+//"kqp",quantifier_question_plus;
+//"kmnq",quantifier_mn_question,"m","n";
+//"kmq", quantifier_m_question,"m";
+//"kxnq",quantifier_0n_question,"n";
+//"kmxq",quantifier_m0_question,"m";
+//"ksq",quantifier_star_question;
+//"kpq",quantifier_plus_question;
+//"kqq",quantifier_question_question;
+//"con",concatenation;
+//"or",oor;
+//"g",group;
+//"gq",group_question;
+//"go",group_once;
+//"cm",condition_mask;
+//"cmy",condition_mask_yes;
+//"cf",condition_forward;
+//"cfn",condition_forward_negative;
+//"cb",condition_back;
+//"cbn",condition_back_negative;
+//"mi",modifier_i;
+//"ms",modifier_s;
+//"mu",modifier_u;
+//"mm",modifier_m;
+//"ad",assert_d;
+//"ac",assert_cap;
+//"ab",assert_b;
+//"abb",assert_b_big;
+//"aab",assert_a_big;
+//"azb",assert_z_big;
+//"az",assert_z;
+//"od",operand_d;
+//"odb",operand_d_big;
+//"os",operand_s;
+//"osb",operand_s_big;
+//"ow",operand_w;
+//"owb",operand_w_big;
+//"dot",dot;
+//"sc",symbol_class,"text";
+//"scn",symbol_class_negative,"text";
+//"range",range,"start","end";
+//"symbol",symbol,"text";
+//"link",link,"n";
+//"oa",operand_a;
+//"oe",operand_e;
+//"on",operand_n;
+//"ot",operand_t;
+//"o8",operand_8,"n";
+//"o16",operand_16,"n";
+//"empty",empty;
+//"t",otext,"text";
 
 /*!
  * Возвращает карту соотвествия тега и типа
@@ -219,10 +285,299 @@ patternContainer * readPatterns(QString &filename) throw (QString)
  *\param[in] xmlnode узел xml дерева, для которого выполняется преобразование
  *\return указатель на созданный узел
  */
-node * readNode(const QDomNode & xmlnode)
+node * readNode(const QDomElement & xmlnode)
 {
-	static node_oor abc;
-	return &abc;
+	QString tag=xmlnode.tagName();
+	node * result=NULL;
+	QString errText = "Attribute %1 is missing from the tag %2 (line: %3; column: %4)";
+	if(tag==QString("kmn"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_mn(xmlnode.attribute("m"),xmlnode.attribute("n"));
+	}
+	else if(tag==QString("km"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("kxn"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_0n(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("kmx"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m0(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("ks"))
+	{
+		result = new node_quantifier_star();
+	}
+	else if(tag==QString("kp"))
+	{
+		result = new node_quantifier_plus();
+	}
+	else if(tag==QString("kq"))
+	{
+		result = new node_quantifier_question();
+	}
+	else if(tag==QString("kmnp"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_mn_plus(xmlnode.attribute("m"),xmlnode.attribute("n"));
+	}
+	else if(tag==QString("kmp"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m_plus(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("kxnp"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_0n_plus(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("kmxp"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m0_plus(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("ksp"))
+	{
+		result = new node_quantifier_star_plus();
+	}
+	else if(tag==QString("kpp"))
+	{
+		result = new node_quantifier_plus_plus();
+	}
+	else if(tag==QString("kqp"))
+	{
+		result = new node_quantifier_question_plus();
+	}
+	else if(tag==QString("kmnq"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_mn_question(xmlnode.attribute("m"),xmlnode.attribute("n"));
+	}
+	else if(tag==QString("kmq"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m_question(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("kxnq"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_0n_question(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("kmxq"))
+	{
+		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_quantifier_m0_question(xmlnode.attribute("m"));
+	}
+	else if(tag==QString("ksq"))
+	{
+		result = new node_quantifier_star_question();
+	}
+	else if(tag==QString("kpq"))
+	{
+		result = new node_quantifier_plus_question();
+	}
+	else if(tag==QString("kqq"))
+	{
+		result = new node_quantifier_question_question();
+	}
+	else if(tag==QString("con"))
+	{
+		result = new node_concatenation();
+	}
+	else if(tag==QString("or"))
+	{
+		result = new node_oor();
+	}
+	else if(tag==QString("g"))
+	{
+		result = new node_group();
+	}
+	else if(tag==QString("gq"))
+	{
+		result = new node_group_question();
+	}
+	else if(tag==QString("go"))
+	{
+		result = new node_group_once();
+	}
+	else if(tag==QString("cm"))
+	{
+		result = new node_condition_mask();
+	}
+	else if(tag==QString("cmy"))
+	{
+		result = new node_condition_mask_yes();
+	}
+	else if(tag==QString("cf"))
+	{
+		result = new node_condition_forward();
+	}
+	else if(tag==QString("cfn"))
+	{
+		result = new node_condition_forward_negative();
+	}
+	else if(tag==QString("cb"))
+	{
+		result = new node_condition_back();
+	}
+	else if(tag==QString("cbn"))
+	{
+		result = new node_condition_back_negative();
+	}
+	else if(tag==QString("mi"))
+	{
+		result = new node_modifier_i();
+	}
+	else if(tag==QString("ms"))
+	{
+		result = new node_modifier_s();
+	}
+	else if(tag==QString("mu"))
+	{
+		result = new node_modifier_u();
+	}
+	else if(tag==QString("mm"))
+	{
+		result = new node_modifier_m();
+	}
+	else if(tag==QString("ad"))
+	{
+		result = new node_assert_d();
+	}
+	else if(tag==QString("ac"))
+	{
+		result = new node_assert_cap();
+	}
+	else if(tag==QString("ab"))
+	{
+		result = new node_assert_b();
+	}
+	else if(tag==QString("abb"))
+	{
+		result = new node_assert_b_big();
+	}
+	else if(tag==QString("aab"))
+	{
+		result = new node_assert_a_big();
+	}
+	else if(tag==QString("azb"))
+	{
+		result = new node_assert_z_big();
+	}
+	else if(tag==QString("az"))
+	{
+		result = new node_assert_z();
+	}
+	else if(tag==QString("od"))
+	{
+		result = new node_operand_d();
+	}
+	else if(tag==QString("odb"))
+	{
+		result = new node_operand_d_big();
+	}
+	else if(tag==QString("os"))
+	{
+		result = new node_operand_s();
+	}
+	else if(tag==QString("osb"))
+	{
+		result = new node_operand_s_big();
+	}
+	else if(tag==QString("ow"))
+	{
+		result = new node_operand_w();
+	}
+	else if(tag==QString("owb"))
+	{
+		result = new node_operand_w_big();
+	}
+	else if(tag==QString("dot"))
+	{
+		result = new node_dot();
+	}
+	else if(tag==QString("sc"))
+	{
+		if(!xmlnode.hasAttribute("text"))	throw errText.arg("text").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_symbol_class(xmlnode.attribute("text"));
+	}
+	else if(tag==QString("scn"))
+	{
+		if(!xmlnode.hasAttribute("text"))	throw errText.arg("text").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_symbol_class_negative(xmlnode.attribute("text"));
+	}
+	else if(tag==QString("range"))
+	{
+		if(!xmlnode.hasAttribute("start"))	throw errText.arg("start").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		if(!xmlnode.hasAttribute("end"))	throw errText.arg("end").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_range(xmlnode.attribute("start"),xmlnode.attribute("end"));
+	}
+	else if(tag==QString("symbol"))
+	{
+		if(!xmlnode.hasAttribute("text"))	throw errText.arg("text").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_symbol(xmlnode.attribute("text"));
+	}
+	else if(tag==QString("link"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_link(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("oa"))
+	{
+		result = new node_operand_a();
+	}
+	else if(tag==QString("oe"))
+	{
+		result = new node_operand_e();
+	}
+	else if(tag==QString("on"))
+	{
+		result = new node_operand_n();
+	}
+	else if(tag==QString("ot"))
+	{
+		result = new node_operand_t();
+	}
+	else if(tag==QString("o8"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_operand_8(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("o16"))
+	{
+		if(!xmlnode.hasAttribute("n"))	throw errText.arg("n").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_operand_16(xmlnode.attribute("n"));
+	}
+	else if(tag==QString("empty"))
+	{
+		result = new node_empty();
+	}
+	else if(tag==QString("t"))
+	{
+		if(!xmlnode.hasAttribute("text"))	throw errText.arg("text").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+		result = new node_otext(xmlnode.attribute("text"));
+	}
+	else
+	{
+		throw QString("unknown tag '%1' in line %2, column %3").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
+	}
+
+	QDomElement child = xmlnode.firstChildElement();
+	while(!child.isNull())
+	{
+		result->addChild(readNode(child));
+		child.nextSiblingElement();
+	}
+	return result;
 }
 
 /*!
@@ -249,7 +604,9 @@ node* readTree (QString &filename)
 	}
 
 	QDomElement rootElement = domDocument.documentElement();
-	QDomNode n = rootElement.firstChild();	//n - ребенок по порядку
+	QDomElement n = rootElement.firstChildElement();	//n - ребенок по порядку
+	if(n.isNull())
+		throw QString("empty tree");
 	return readNode(n);
 }
 
@@ -263,16 +620,18 @@ void postprocessing(QString * str)
 
 }
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 	
 	//настройка языка и консоли
     QTextCodec *tc=QTextCodec::codecForName("windows-1251");
+	QTextCodec *tcl=QTextCodec::codecForName("IBM 866");
 	QTextCodec::setCodecForCStrings(tc);
-	QTextCodec::setCodecForLocale(tc);
-	setlocale( LC_ALL, "Russian_Russia.1251" );
-	
+	QTextCodec::setCodecForLocale(tcl);
+	//setlocale( LC_ALL, "Russian_Russia.1251" );
+	const char * sada;
 	try
 	{
 		//запуск тестов
