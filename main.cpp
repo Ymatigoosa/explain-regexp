@@ -244,7 +244,6 @@ patternContainer * readPatterns(QString &filename) throw (QString)
 {
 	patternContainer * data = new patternContainer();
 	const QMap<QString,nodeType> & tags = buildTagsMap();
-	QDomElement currentElement;
 
 	QFile file(filename);					//открывает файл с шаблонами
 	if (!file.open(QIODevice::ReadOnly))	//проверка
@@ -260,21 +259,16 @@ patternContainer * readPatterns(QString &filename) throw (QString)
 	}
 
 	QDomElement rootElement = domDocument.documentElement();
-	QDomNode n = rootElement.firstChild();	//n - ребенок по порядку
+	QDomElement n = rootElement.firstChildElement();	//n - ребенок по порядку
 	while (!n.isNull()) 
 	{
-		if (n.isElement()) 
+		if( n.tagName()==QString("default") && n.hasAttribute("type") && tags.contains(n.attribute("type")) )//если шаблон стандартный
+			data->addDefault(n.attribute("type"), n.text());
+		if( n.tagName()==QString("variant") && n.hasAttribute("type") )//если шаблон альтернативный
 		{
-			currentElement = n.toElement();
-			if( currentElement.tagName()==QString("default") && currentElement.hasAttribute("type") && tags.contains(currentElement.attribute("type")) )//если шаблон стандартный
-				data->addDefault(currentElement.attribute("type"), currentElement.text());
-			if( currentElement.tagName()==QString("variant") && currentElement.hasAttribute("type") )//если шаблон альтернативный
-			{
-				data->addVariant(QDomElementToVariant(currentElement));
-			}
-			
-		}
-		n = n.nextSibling();	//следущий ребенок
+			data->addVariant(QDomElementToVariant(n));
+		}			
+		n = n.nextSiblingElement();	//следущий ребенок
 	}
 	return data;
 }
@@ -574,7 +568,7 @@ node * readNode(const QDomElement & xmlnode)
 	QDomElement child = xmlnode.firstChildElement();
 	while(!child.isNull())
 	{
-		result->addChild(readNode(child));
+		result->addChild(readNode(child));//рекурсивно вызываем этуже функцию для потомков узла
 		child.nextSiblingElement();
 	}
 	return result;
