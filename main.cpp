@@ -284,6 +284,8 @@ node * readNode(const QDomElement & xmlnode)
 	QString tag=xmlnode.tagName();
 	node * result=NULL;
 	QString errText = "Attribute %1 is missing from the tag %2 (line: %3; column: %4)";
+
+	//порождаем узел
 	if(tag==QString("kmn"))
 	{
 		if(!xmlnode.hasAttribute("m"))	throw errText.arg("m").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
@@ -565,11 +567,12 @@ node * readNode(const QDomElement & xmlnode)
 		throw QString("unknown tag '%1' in line %2, column %3").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
 	}
 
+	//заполняем потомков
 	QDomElement child = xmlnode.firstChildElement();
 	while(!child.isNull())
 	{
 		result->addChild(readNode(child));//рекурсивно вызываем этуже функцию для потомков узла
-		child.nextSiblingElement();
+		child = child.nextSiblingElement();
 	}
 	return result;
 }
@@ -580,11 +583,8 @@ node * readNode(const QDomElement & xmlnode)
  *\param[in] filename  имя файла
  *\return ссылка на верхний узел дерева
  */
-node* readTree (QString &filename)
+node* readTree (QString filename)
 {
-	static node_oor abc;
-	return &abc;
-
 	QFile file(filename);					//открывает файл с шаблонами
 	if (!file.open(QIODevice::ReadOnly))	//проверка
 		throw QString("tree-file open errror");			//выходим при ошибке
@@ -630,6 +630,7 @@ int main(int argc, char *argv[])
 		//запуск тестов
 		tests t1;
 		QTest::qExec(&t1);
+		node * tree1 = readTree("tree1.xml");
 		puts( qPrintable(QString("русский текст")));
 		qDebug("%s",qPrintable(QString("русский текст")));
 		//qDebug("%s",dfsdf);
