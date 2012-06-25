@@ -1124,9 +1124,12 @@ public:
 		for(int i=0;i<_size;++i)
 		{
 			if(i+3<=_size && text[i+1]=='-')
-				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));
+			{
+				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));//если есть символ '-' добавлеем узел range
+				i+=2;//и сдвигаем индекс на 2
+			}
 			else
-				this->addChild(new node_symbol(QString(text[i])));
+				this->addChild(new node_symbol(QString(text[i])));//иначе добавляем ребенка symbol
 		}
 	}
 
@@ -1155,9 +1158,12 @@ public:
 		for(int i=0;i<_size;++i)
 		{
 			if(i+3<=_size && text[i+1]=='-')
-				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));
+			{
+				this->addChild(new node_range(QString(text[i]),QString(text[i+2])));//если есть символ '-' добавлеем узел range
+				i+=2;//и сдвигаем индекс на 2
+			}
 			else
-				this->addChild(new node_symbol(QString(text[i])));
+				this->addChild(new node_symbol(QString(text[i])));//иначе добавляем ребенка symbol
 		}
 	}
 
