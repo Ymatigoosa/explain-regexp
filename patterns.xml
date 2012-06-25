@@ -34,7 +34,7 @@
   <default type="kqq">есть или нет $1 (нежадный квантификатор)</default>
 
   <default type="con">$1 затем $2</default>
-  <variant type="con" child-type="cf|cfn|cb|cbn">$1 $2</variant>
+  <!--<variant type="con" child-type="cf|cfn|cb|cbn">$1 $2</variant>-->
   <variant type="con" child1-type="con">$1, затем $2</variant>
 
   <default type="or">$1 или $2</default>
@@ -49,16 +49,16 @@
   <default type="go">однократная подмаска: "$1"</default>
   <variant type="go" form="g">однократных подмасок: "$1"</variant>
 
-  <default type="cm">если условие $1 верно, то проверить шаблон "$2" иначе "$3"</default>
+  <default type="cm">если $1 верно, то проверить шаблон "$2" иначе "$3"</default>
   <variant type="cm" child-type="link">если подмаска №$1 успешно сопоставлена, то проверить шаблон "$2" иначе "$3"</variant>
 
   <default type="cmy">если подмаска $1 успешно сопоставлена, то проверить шаблон "$2"</default>
   <variant type="cmy" child-type="link">если подмаска №$1 успешно сопоставлена, то проверить шаблон "$2"</variant>
 
-  <default type="cf">текст далее должен соответствовать "$1",</default>
-  <default type="cfn">текст далее не должен соответствовать "$1",</default>
-  <default type="cb">предшествующий текст должен соответствовать "$1",</default>
-  <default type="cbn">предшествующий текст не должен соответствовать "$1",</default>
+  <default type="cf">условие: текст далее должен соответствовать "$1",</default>
+  <default type="cfn">условие: текст далее не должен соответствовать "$1",</default>
+  <default type="cb">условие: предшествующий текст должен соответствовать "$1",</default>
+  <default type="cbn">условие: предшествующий текст не должен соответствовать "$1",</default>
 
   <!--Операнды -->
   <default type="mi">не учитывать регистр;</default>
@@ -108,7 +108,7 @@
   <default type="dot">любой символ</default>
   <variant type="dot" form="g">любых символов</variant>
 
-  <default type="sc">любой из символов $ text</default>
+  <default type="sc">любой из символов $text</default>
   <variant type="sc" form="g">любых из символов $text</variant>
 
   <default type="scn">любой из символов кроме $text</default>
