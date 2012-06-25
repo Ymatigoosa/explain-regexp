@@ -609,9 +609,13 @@ node* readTree (QString filename)
  * Удаляет двойные пробелы, запятые, ставит пробелы между подряд идущими скобками.
  *\param[in,out] str обрабатываемая строка
  */
-void postprocessing(QString * str)
+void postprocessing(QString & str)
 {
-
+	str.replace(QRegExp(",+"),",");
+	str.replace(QRegExp("(^ +)|( +$)"),"");
+	str.replace("))",") )");
+	str.replace("((","( (");
+	str.replace(QRegExp(" +")," ");
 }
 
 

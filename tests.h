@@ -6,7 +6,7 @@
 #include "node.h"
 #include "node_childs.h"
 
-void postprocessing(QString * str);
+void postprocessing(QString & str);
 
 /*!
  * \brief Тесты 

@@ -24,20 +24,20 @@ public:
 	 * Возвращает название тега, переопределяется потомками
 	 * \return название тега
 	 */
-    virtual QString tagName()=0 ;
+    virtual QString tagName() const=0;
 	
 	/*!
 	 * Возвращает тип тега, переопределяется потомками
 	 * \return тип тега
 	 */
-    virtual nodeType type()=0;
+    virtual nodeType type() const=0;
 	
 	/*!
 	 * Проверяет, содержит ли узел необходимый атрибут
 	 * \param[in] arg название атрибута (xml)
 	 * \return true если атрибут присутствует в узле
 	 */
-    virtual bool hasArg(QString arg) = 0;
+    virtual bool hasArg(QString arg) const= 0;
 
 
 	/*!

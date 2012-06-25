@@ -274,7 +274,7 @@ void tests::postprocessingTest_data()
 	QTest::newRow("comma") << QString("a,, или b") << QString("a, или b") ;
 	QTest::newRow("brackets") << QString("(a или (b))") << QString("(a или (b) )") ;
 	QTest::newRow("space") << QString(" a    или b   ") << QString("a или b") ;
-	QTest::newRow("all") << QString(" (a    или,, (b)   )") << QString("(a или, (b))") ;
+	QTest::newRow("all") << QString(" (a    или,, (b)   )") << QString("(a или, (b) )") ;
 }
 	
 void tests::postprocessingTest()
@@ -282,6 +282,7 @@ void tests::postprocessingTest()
 	QFETCH(QString,str);
 	QFETCH(QString,expected);
 	
+	postprocessing(str);
 	if(str!=expected)
 	{
 		printf("\nExpected: %s\n",qPrintable(QString(expected)));
