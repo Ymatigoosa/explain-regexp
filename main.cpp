@@ -625,7 +625,6 @@ int main(int argc, char *argv[])
 	QTextCodec::setCodecForCStrings(tc);
 	QTextCodec::setCodecForLocale(tcl);
 	//setlocale( LC_ALL, "Russian_Russia.1251" );
-	const char * sada;
 	try
 	{
 		//запуск тестов
@@ -635,7 +634,7 @@ int main(int argc, char *argv[])
 		qDebug("%s",qPrintable(QString("русский текст")));
 		//qDebug("%s",dfsdf);
 	}
-	catch(QString s)
+	catch(QString &s)
 	{
 		qDebug("EXEPTION: %s!",qPrintable(s)); 
 	}
