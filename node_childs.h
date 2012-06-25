@@ -1153,7 +1153,7 @@ public:
 		
 		int pos = current_pattern.indexOf("$text");//позиция найденной подстроки
 		if(pos==-1)
-			throw QString("pattern for symbol_class_negative must contain $text");
+			throw QString("pattern for symbol_class must contain $text");
 		
 		//обходим детей
 		for(int i=0;i<childs.count();++i)
