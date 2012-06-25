@@ -2,6 +2,22 @@
  * \file main.cpp
  * Основной алгоритм программы
  */
+
+/*!
+ *\mainpage explain-regexp Главная страница
+ *\section Алгоритм
+ main - реализует главный алгоритм программы
+ *\subsection Шаблоны
+ *QString - хранит стандартный шаблон.
+ *\ref variant - хранит информация об альтернативном щаблоне.\n
+ *\ref nodePattern - объединяет 2 поля перечисленных выше для пхранения списка шаблонов для определенного узла\n
+ *\ref patternContainer - хранит список шаблонов для всех узлов.\n
+ *\subsection Деревья
+ *\ref node - абстрактный класс узла дерева, рекурсивную функцию для генерации описания дерева node::description\n
+ *Для каждого узла определяется класс потомок, который переопределяет методы, возвращающие тип и тег, а также могут переопределить методы генерации описания\n
+ *\ref nodeType - список типов узлов, i пункт списка имеет значение 2^i для реализации битовых флажков для допустимых типов шаблона.\n
+ */
+
 #include <QtCore/QCoreApplication>
 #include "nodeType.h"
 #include "patterncontainer.h"
@@ -11,22 +27,6 @@
 #include <QMap>
 #include <QTextCodec>
 #include <clocale>
-
-
-/*!
- *\mainpage explain-regexp Главная страница
- *\section Алгоритм
- main - реализует главный алгоритм программы
- *\subsection Шаблоны
- *QString - хранит стандартный шаблон.
- *\ref variant - хранит информация об альтернативном щаблоне .
- *\ref nodePattern - объединяет 2 поля перечисленных выше для пхранения списка шаблонов для определенного узла
- *\ref patternContainer - хранит список шаблонов для всех узлов.
- *\subsection Деревья
- *\ref node - абстрактный класс узла дерева, рекурсивную функцию для генерации описания дерева node::description
- *Для каждого узла определяется класс потомок, который переопределяет методы, возвращающие тип и тег, а также могут переопределить методы генерации описания
- *\ref nodeType - список типов узлов, i пункт списка имеет значение 2^i для реализации битовых флажков для допустимых типов шаблона.
- */
 
 //тег,тип,атрибут1,атрибут2;
 //"kmn",quantifier_mn,"m","n";
@@ -195,9 +195,9 @@ variant QDomElementToVariant(const QDomElement &currentElement)
 
 	t_variant.content = currentElement.attribute("content");//поле content заполнено
 	t_variant.parentContent = currentElement.attribute("parent-content");//поле parent-content заполнено
-	t_variant.childiContent << currentElement.attribute("child1-content");//поле child1-content заполнено
-	t_variant.childiContent << currentElement.attribute("child2-content");//поле child2-content заполнено
-	t_variant.childiContent << currentElement.attribute("child3-content");//поле child3-content заполнено
+	t_variant.childiContent[0] = currentElement.attribute("child1-content");//поле child1-content заполнено
+	t_variant.childiContent[1] = currentElement.attribute("child2-content");//поле child2-content заполнено
+	t_variant.childiContent[2] = currentElement.attribute("child3-content");//поле child3-content заполнено
 	t_variant.form = currentElement.attribute("form");//поле form заполнено
 	t_variant.m = currentElement.attribute("m");//поле m заполнено
 	t_variant.n = currentElement.attribute("n");//поле n заполнено
@@ -281,9 +281,9 @@ patternContainer * readPatterns(QString &filename) throw (QString)
  */
 node * readNode(const QDomElement & xmlnode)
 {
-	QString tag=xmlnode.tagName();
-	node * result=NULL;
-	QString errText = "Attribute %1 is missing from the tag %2 (line: %3; column: %4)";
+	QString tag=xmlnode.tagName();//текущий тег
+	node * result=NULL;//результирующий узел
+	QString errText = "Attribute %1 is missing from the tag %2 (line: %3; column: %4)";//текст ошибки
 
 	//порождаем узел
 	if(tag==QString("kmn"))
@@ -562,7 +562,7 @@ node * readNode(const QDomElement & xmlnode)
 		if(!xmlnode.hasAttribute("text"))	throw errText.arg("text").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
 		result = new node_otext(xmlnode.attribute("text"));
 	}
-	else
+	else//иначе выталкиваем ошибку(если ни один тег не подошел)
 	{
 		throw QString("unknown tag '%1' in line %2, column %3").arg(tag).arg(xmlnode.lineNumber()).arg(xmlnode.columnNumber());
 	}
@@ -635,7 +635,7 @@ int main(int argc, char *argv[])
 		qDebug("%s",qPrintable(QString("русский текст")));
 		//qDebug("%s",dfsdf);
 	}
-	catch(QString &s)
+	catch(const QString &s)
 	{
 		qDebug("EXEPTION: %s!",qPrintable(s)); 
 	}

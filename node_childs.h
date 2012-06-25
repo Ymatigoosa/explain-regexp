@@ -14,8 +14,8 @@
 class node_quantifier_mn :	public node
 {
 public:
-	QString m;
-	QString n;
+	//QString m;
+	//QString n;
 
 	node_quantifier_mn(QString _m,QString _n)
 	{ m=_m;n=_n;	}
@@ -26,7 +26,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_mn;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
 };
 
@@ -37,7 +37,7 @@ public:
 class node_quantifier_m :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m(QString _m)
 	{ m=_m;	}
@@ -46,7 +46,7 @@ public:
 	{	return QString("km");	}
 	nodeType type()///<тип 
 	{	return quantifier_m;	}
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -57,7 +57,7 @@ public:
 class node_quantifier_0n :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 
 	node_quantifier_0n(QString _n)///<конструктор по умолчанию
@@ -69,7 +69,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_0n;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("n") ) ? true : false;	}
 };
 
@@ -80,7 +80,7 @@ public:
 class node_quantifier_m0 :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m0(QString _m)
 	{	m=_m;}
@@ -91,7 +91,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_m0;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -111,7 +111,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_star;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -131,7 +131,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -151,7 +151,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -162,8 +162,8 @@ public:
 class node_quantifier_mn_plus :	public node
 {
 public:
-	QString n;
-	QString m;
+	//QString n;
+	//QString m;
 
 	node_quantifier_mn_plus(QString _m,QString _n)
 	{	m=_m;n=_n;}
@@ -174,7 +174,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_mn_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
 };
 
@@ -185,7 +185,7 @@ public:
 class node_quantifier_m_plus :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m_plus(QString _m)
 	{	m=_m;}
@@ -196,7 +196,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_m_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -207,7 +207,7 @@ public:
 class node_quantifier_0n_plus :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 	node_quantifier_0n_plus(QString _n)
 	{	n=_n;}
@@ -218,7 +218,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_0n_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("n") ) ? true : false;	}
 };
 
@@ -229,7 +229,7 @@ public:
 class node_quantifier_m0_plus :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m0_plus(QString _m)
 	{	m=_m;}
@@ -240,7 +240,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_m0_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -260,7 +260,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_star_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -280,7 +280,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_plus_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -300,7 +300,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_question_plus;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -311,8 +311,8 @@ public:
 class node_quantifier_mn_question :	public node
 {
 public:
-	QString n;
-	QString m;
+	//QString n;
+	//QString m;
 
 	node_quantifier_mn_question(QString _m,QString _n)
 	{	m=_m;n=_n;}
@@ -323,7 +323,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_mn_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") || arg==QString("n") ) ? true : false;	}
 };
 
@@ -334,7 +334,7 @@ public:
 class node_quantifier_m_question :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m_question(QString _m)
 	{	m=_m;}
@@ -345,7 +345,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_m_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -356,7 +356,7 @@ public:
 class node_quantifier_0n_question :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 	node_quantifier_0n_question(QString _n)
 	{	n=_n;}
@@ -367,7 +367,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_0n_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("n") ) ? true : false;	}
 };
 
@@ -378,7 +378,7 @@ public:
 class node_quantifier_m0_question :	public node
 {
 public:
-	QString m;
+	//QString m;
 
 	node_quantifier_m0_question(QString _m)///<конструктор по умолчанию
 	{	m=_m;}
@@ -389,7 +389,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_m0_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return ( arg==QString("m") ) ? true : false;	}
 };
 
@@ -410,7 +410,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_star_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -431,7 +431,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_plus_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -452,7 +452,7 @@ public:
 	nodeType type()///<тип 
 	{	return quantifier_question_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -473,7 +473,7 @@ public:
 	nodeType type()///<тип 
 	{	return concatenation;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -494,7 +494,7 @@ public:
 	nodeType type()///<тип 
 	{	return oor;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -515,7 +515,7 @@ public:
 	nodeType type()///<тип 
 	{	return group;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -536,7 +536,7 @@ public:
 	nodeType type()///<тип 
 	{	return group_question;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -557,7 +557,7 @@ public:
 	nodeType type()///<тип 
 	{	return group_once;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -578,7 +578,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_mask;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -599,7 +599,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_mask_yes;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -620,7 +620,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_forward;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -641,7 +641,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_forward_negative;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -662,7 +662,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_back;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -683,7 +683,7 @@ public:
 	nodeType type()///<тип 
 	{	return condition_back_negative;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -704,7 +704,7 @@ public:
 	nodeType type()///<тип 
 	{	return modifier_i;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -725,7 +725,7 @@ public:
 	nodeType type()///<тип 
 	{	return modifier_s;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -746,7 +746,7 @@ public:
 	nodeType type()///<тип 
 	{	return modifier_u;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -767,7 +767,7 @@ public:
 	nodeType type()///<тип 
 	{	return modifier_m;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -788,7 +788,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_d;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -809,7 +809,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_cap;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -830,7 +830,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_b;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -851,7 +851,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_b_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -872,7 +872,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_a_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -893,7 +893,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_z_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -914,7 +914,7 @@ public:
 	nodeType type()///<тип 
 	{	return assert_z;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -935,7 +935,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_d;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -956,7 +956,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_d_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -977,7 +977,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_s;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -998,7 +998,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_s_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1019,7 +1019,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_w;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1040,7 +1040,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_w_big;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1061,7 +1061,7 @@ public:
 	nodeType type()///<тип 
 	{	return dot;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1072,11 +1072,8 @@ public:
 class node_range :	public node
 {
 public:
-	QString start;
-	QString end;
-
 	node_range(QString _start,QString _end)
-	{ start=_start;	end=_end;	}
+	{ m=_start;	n=_end;	}
 
 	QString tagName()///<название тега
 	{	return QString("range");	}
@@ -1084,7 +1081,7 @@ public:
 	nodeType type()///<тип 
 	{	return range;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("start") || arg==QString("end")) ? true : false;	}
 };
 
@@ -1095,7 +1092,7 @@ public:
 class node_symbol :	public node
 {
 public:
-	QString text;
+	//QString text;
 
 	node_symbol(QString _text)
 	{	text=_text;}
@@ -1106,7 +1103,7 @@ public:
 	nodeType type()///<тип 
 	{	return symbol;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("text") ) ? true : false;	}
 };
 
@@ -1139,9 +1136,40 @@ public:
 	nodeType type()///<тип 
 	{	return symbol_class;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("text")) ? true : false;	}
 
+
+	/*!
+	*\brief переопремеденная функция node::description
+	*переопределяет функцию node::description
+	*/
+    QString description(const patternContainer & patterns, int num=-1, node * parent=NULL, QString form = QString())
+	{
+		QString current_pattern = this->pattern(patterns.getPatternFromType(this->type()),parent,form);
+		QString insert;//строка которую вставляем
+		static int new_num=num;//номер для подстановки в следующий узел
+		new_num=(num<0) ? (num-1) : (num+1);//если номер отрицателен, ведем подсчет но в отрицательных значениях
+		
+		int pos = current_pattern.indexOf("$text");//позиция найденной подстроки
+		if(pos==-1)
+			throw QString("pattern for symbol_class_negative must contain $text");
+		
+		//обходим детей
+		for(int i=0;i<childs.count();++i)
+		{
+			insert.append(childs[i]->description(patterns,new_num,this,form));
+			if(i+1!=childs.count())
+				insert.append(", ");
+		}
+		current_pattern.replace(pos,5,insert);//заменяем на внутренний формат подстановки qt
+
+		//номер узла
+		if(num>=0)
+			current_pattern = QString("<%1>%2</%1>").arg(num).arg(current_pattern);
+
+		return current_pattern;
+	}
 };
 
 /*!
@@ -1173,8 +1201,39 @@ public:
 	nodeType type()///<тип 
 	{	return symbol_class_negative;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("text")) ? true : false;	}
+	
+	/*!
+	*\brief переопремеденная функция node::description
+	*переопределяет функцию node::description
+	*/
+    QString description(const patternContainer & patterns, int num=-1, node * parent=NULL, QString form = QString())
+	{
+		QString current_pattern = this->pattern(patterns.getPatternFromType(this->type()),parent,form);
+		QString insert;//строка которую вставляем
+		static int new_num=num;//номер для подстановки в следующий узел
+		new_num=(num<0) ? (num-1) : (num+1);//если номер отрицателен, ведем подсчет но в отрицательных значениях
+		
+		int pos = current_pattern.indexOf("$text");//позиция найденной подстроки
+		if(pos==-1)
+			throw QString("pattern for symbol_class_negative must contain $text");
+		
+		//обходим детей
+		for(int i=0;i<childs.count();++i)
+		{
+			insert.append(childs[i]->description(patterns,new_num,this,form));
+			if(i+1!=childs.count())
+				insert.append(", ");
+		}
+		current_pattern.replace(pos,5,insert);//заменяем на внутренний формат подстановки qt
+
+		//номер узла
+		if(num>=0)
+			current_pattern = QString("<%1>%2</%1>").arg(num).arg(current_pattern);
+
+		return current_pattern;
+	}
 
 };
 
@@ -1185,7 +1244,7 @@ public:
 class node_link :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 	node_link(QString _n)
 	{	n=_n;}
@@ -1196,7 +1255,7 @@ public:
 	nodeType type()///<тип 
 	{	return link;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("n") ) ? true : false;	}
 };
 
@@ -1217,7 +1276,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_a;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1238,7 +1297,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_e;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1259,7 +1318,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_n;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1280,7 +1339,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_t;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1291,7 +1350,7 @@ public:
 class node_operand_8 :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 	node_operand_8(QString _n)
 	{	n=_n;}
@@ -1302,7 +1361,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_8;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("n")) ? true : false;	}
 };
 
@@ -1313,7 +1372,7 @@ public:
 class node_operand_16 :	public node
 {
 public:
-	QString n;
+	//QString n;
 
 	node_operand_16(QString _n)
 	{	n=_n;}
@@ -1324,7 +1383,7 @@ public:
 	nodeType type()///<тип 
 	{	return operand_16;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("n")) ? true : false;	}
 };
 
@@ -1344,7 +1403,7 @@ public:
 	nodeType type()///<тип 
 	{	return empty;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return false;	}
 };
 
@@ -1355,7 +1414,7 @@ public:
 class node_otext :	public node
 {
 public:
-	QString text;
+	//QString text;
 
 	node_otext(QString _text)
 	{ text=_text;	}
@@ -1366,7 +1425,7 @@ public:
 	nodeType type()///<тип 
 	{	return otext;	}
 
-	bool hasArg(QString & arg)
+	bool hasArg(QString arg)
 	{	return (arg==QString("text")) ? true : false;	}
 };
 #pragma warning( default : 4100 )

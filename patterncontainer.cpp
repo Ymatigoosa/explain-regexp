@@ -61,7 +61,7 @@ void patternContainer::addVariant(variant item)
 	}
 }
 
-nodePattern patternContainer::getPatternFromType(nodeType type)
+nodePattern patternContainer::getPatternFromType(nodeType type) const
 {
 	return nodePatterns[type];
 }

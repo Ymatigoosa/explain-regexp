@@ -2,33 +2,33 @@
 <patterns>
   <default type="kmn">$1 от $m до $n раз</default>
   <default type="km">$1 $m раз</default>
-  <variant type="km" m="[2-9]*[2-4]">$1 $m раза</variant>
+  <variant type="km" m="[1-9][0-9]*[2-9][2-4]|[2-9][2-4]|[2-4]">$1 $m раза</variant>
   <default type="kxn">$1 не более $n раз</default>
   <default type="kmx">$1 не менее $m раз</default>
   <default type="ks">любое количество или отсутствие $1g</default>
-  <variant type="ks" child-type="dot">любая последовательность символов или её отсутсвие</variant>
+  <variant type="ks" child-type="dot">любая последовательность символов или её отсутствие</variant>
   <default type="kp">любое количество $1g</default>
   <variant type="kp" child-type="dot">любая последовательность символов</variant>
   <default type="kq">есть или нет $1</default>
 
   <default type="kmnp">$1 от $m до $n раз (жадный квантификатор)</default>
   <default type="kmp">$1 $m раз (жадный квантификатор)</default>
-  <variant type="kmp" m="[2-9]*[2-4]">$1 $m раза (жадный квантификатор)</variant>
+  <variant type="kmp" m="[1-9][0-9]*[2-9][2-4]|[2-9][2-4]|[2-4]">$1 $m раза (жадный квантификатор)</variant>
   <default type="kxnp">$1 не более $n раз (жадный квантификатор)</default>
   <default type="kmxp">$1 не менее $m раз (жадный квантификатор)</default>
   <default type="ksp">любое количество или отсутствие $1g (жадный квантификатор)</default>
-  <variant type="ksp" child-type="dot">любая последовательность символов или её отсутсвие (жадный квантификатор)</variant>
+  <variant type="ksp" child-type="dot">любая последовательность символов или её отсутствие (жадный квантификатор)</variant>
   <default type="kpp">любое количество $1g (жадный квантификатор)</default>
   <variant type="kpp" child-type="dot">любая последовательность символов (жадный квантификатор)</variant>
   <default type="kqp">есть или нет $1 (жадный квантификатор)</default>
 
   <default type="kmnq">$1 от $m до $n раз (нежадный квантификатор)</default>
   <default type="kmq">$1 $m раз (нежадный квантификатор)</default>
-  <variant type="kmq" m="[2-9]*[2-4]">$1 $m раза (нежадный квантификатор)</variant>
+  <variant type="kmq" m="[1-9][0-9]*[2-9][2-4]|[2-9][2-4]|[2-4]">$1 $m раза (нежадный квантификатор)</variant>
   <default type="kxnq">$1 не более $n раз (нежадный квантификатор)</default>
   <default type="kmxq">$1 не менее $m раз (нежадный квантификатор)</default>
   <default type="ksq">любое количество или отсутствие $1g (нежадный квантификатор)</default>
-  <variant type="ksq" child-type="dot">любая последовательность символов или её отсутсвие (нежадный квантификатор)</variant>
+  <variant type="ksq" child-type="dot">любая последовательность символов или её отсутствие (нежадный квантификатор)</variant>
   <default type="kpq">любое количество $1g (нежадный квантификатор)</default>
   <variant type="kpq" child-type="dot">любая последовательность символов (нежадный квантификатор)</variant>
   <default type="kqq">есть или нет $1 (нежадный квантификатор)</default>
@@ -38,7 +38,7 @@
   <variant type="con" child1-type="con">$1, затем $2</variant>
 
   <default type="or">$1 или $2</default>
-  <variant type="or" child1-type="con">$1, или $2</variant>
+  <variant type="or" child1-type="or">$1, или $2</variant>
 
   <default type="g">подмаска №$X: "$1"</default>
   <variant type="g" form="g">подмасок №$X: “$1”</variant>
@@ -142,5 +142,5 @@
   <default type="empty">пустая строка</default>
   <variant type="empty" form="g">пустых строк</variant>
 
-  <default type="t">“$text”</default>
+  <default type="t">$text</default>
 </patterns>

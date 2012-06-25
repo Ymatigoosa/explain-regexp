@@ -12,9 +12,11 @@
  */
 class node
 {
-private:
+protected:
     QVector<node *> childs; ///<Ссылки на потомков
 public:
+	QString text,m,n;//для функции check
+
     node();
 	~node();
 
@@ -35,7 +37,7 @@ public:
 	 * \param[in] arg название атрибута (xml)
 	 * \return true если атрибут присутствует в узле
 	 */
-    virtual bool hasArg(QString & arg) = 0;
+    virtual bool hasArg(QString arg) = 0;
 
 
 	/*!
@@ -46,7 +48,7 @@ public:
 	 * \param[in] form	требуемая форма. По умолчанию: пустая строка.
 	 * \return строка-описание.
 	 */
-    QString description(const patternContainer & patterns, int num=-1, node * parent=0, QString form = QString());
+    virtual QString description(const patternContainer & patterns, int num=-1, node * parent=NULL, QString form = QString());
 	
 	/*!
 	 * Выбирает наиболее подходящий шаблон для узла из структуры nodePattern
@@ -55,7 +57,7 @@ public:
 	 * \param[in]	form	требуемая форма (пустая строка – стандартная форма)
 	 * \return строка-описание
 	 */
-	QString pattern(const nodePattern & _nodePattern, node * parent=0, QString form = QString());
+	QString pattern(const nodePattern & _nodePattern, node * parent=NULL, QString form = QString());
     
 	/*!
 	 * Проверяет, соответствует ли узел, условию применимости альтернативного шаблона
@@ -63,7 +65,7 @@ public:
 	 * \param[in]	parent	ссылка на родителя
 	 * \return	true если шаблон подходит
 	 */
-	bool check(const variant & pattern, node * parent = 0);
+	bool check(const variant & pattern, node * parent = NULL,QString form=QString());
 
 	/*!
 	 * добавляет ребенка к вершине дерева

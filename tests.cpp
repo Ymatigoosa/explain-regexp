@@ -92,12 +92,12 @@ void tests::descriptionTest_data()
 	 QTest::addColumn<node*>("root");
 	 QTest::addColumn<QString>("expected");
 
+	 QTest::newRow("alt pattern2") << tree_alt_pattern2() << QString("любое количество любых из символов от A до Z или любое количество любых из символов от a до z, или любое количество любых из символов от 0 до 9");
 	 QTest::newRow("standart patterns") << tree_standart_patterns() << QString("a или b");
 	 QTest::newRow("alt with forms") << tree_alt_form() << QString("любое количество или отсутствие пробельных символов");
 	 QTest::newRow("quantifier1") << tree_quantifier() << QString("любой символ 2 раза или любой символ 112 раз");
-	 QTest::newRow("quantifier2") << tree_quantifier() << QString("любой символ 5 раз или любой символ 1024 раза");
+	 QTest::newRow("quantifier2") << tree_quantifier2() << QString("любой символ 5 раз или любой символ 1024 раза");
 	 QTest::newRow("alt pattern1") << tree_alt_pattern1() << QString("любая последовательность символов или её отсутствие");
-	 QTest::newRow("alt pattern2") << tree_alt_pattern2() << QString("любой из символов от 0 до 9 не менее 1 раза или любой из символов от A до Z не менее 1 раза, или любой из символов от a до z не менее 1 раза");
 
 	
 }
@@ -109,58 +109,74 @@ void tests::descriptionTest()
 	
 	QString result =  root->description(*patterns);
 	delete root;
-	printf("\nExpected: %s\n",qPrintable(QString(expected)));
-	printf("Returned: %s\n",qPrintable(QString(result)));	
-	QVERIFY(result==expected);	
+	if(result!=expected)
+	{
+		printf("\nExpected: %s\n",qPrintable(QString(expected)));
+		printf("Returned: %s\n",qPrintable(QString(result)));	
+		QFAIL("result != expected");
+	}
 }
 
 void tests::patternTest_data()
 {
 	QTest::addColumn<node*>("parent");
 	QTest::addColumn<node*>("current");
+	QTest::addColumn<QString>("form");
 	QTest::addColumn<QString>("expected");
 	
 	node *parent, *current; //временные переменные для заполнения таблицы
 
 	parent = tree_alt_form();
 	current = parent->child(0);
-	QTest::newRow("form") << parent << current << QString("пробельных символов");
+	QTest::newRow("form") << parent << current << QString("g") << QString("пробельных символов");
 
 	parent = 0;
 	current = tree_alt_pattern3();
-	QTest::newRow("variant") << parent << current << QString("$1, или $2");
+	QTest::newRow("variant") << parent << current << QString() << QString("$1, или $2");
 
 	parent = tree_alt_pattern3();
 	current = parent->child(0);
-	QTest::newRow("default") << parent << current << QString("$1 или $2");
+	QTest::newRow("default") << parent << current << QString() << QString("$1 или $2");
 
 	parent = tree_alt_pattern4();
 	current = parent->child(0);
-	QTest::newRow("default&parent") << parent << current << QString("ссылка на подмаску $n");
+	QTest::newRow("default&parent") << parent << current << QString() << QString("ссылка на подмаску $n");
 
 	parent = tree_quantifier();
 	current =  parent->child(0);
-	QTest::newRow("quantifier1") << parent << current << QString("$1 $m раза");
+	QTest::newRow("quantifier1") << parent << current << QString() << QString("$1 $m раза");
 
 	parent = tree_quantifier();
 	current =  parent->child(1);
-	QTest::newRow("quantifier2") << parent << current << QString("$1 $m раз");
+	QTest::newRow("quantifier2") << parent << current << QString() << QString("$1 $m раз");
+
+	parent = tree_quantifier2();
+	current =  parent->child(0);
+	QTest::newRow("quantifier3") << parent << current << QString() << QString("$1 $m раз");
+
+	parent = tree_quantifier2();
+	current =  parent->child(1);
+	QTest::newRow("quantifier4") << parent << current << QString() << QString("$1 $m раза");
 }
 void tests::patternTest()
 {
 	QFETCH(node*,parent);
 	QFETCH(node*,current);
+	QFETCH(QString,form);
     QFETCH(QString,expected);
 
 	nodePattern current_patterns =  patterns->getPatternFromType(current->type());
-	QString result = current->pattern(current_patterns);
+	QString result = current->pattern(current_patterns,parent,form);
 	if(parent==0)
 		delete current;
 	else
 		delete parent;
-	printf("\nExpected: %s\n",qPrintable(QString(expected)));
-	printf("Returned: %s\n",qPrintable(QString(result)));
-	QVERIFY(result==expected);
+	if(result!=expected)
+	{
+		printf("\nExpected: %s\n",qPrintable(QString(expected)));
+		printf("Returned: %s\n",qPrintable(QString(result)));	
+		QFAIL("result != expected");
+	}
 }
 
 void tests::checkTest_data()
@@ -168,30 +184,38 @@ void tests::checkTest_data()
 	QTest::addColumn<node*>("parent");
 	QTest::addColumn<node*>("current");
 	QTest::addColumn<variant>("pattern");
+	QTest::addColumn<QString>("form");
 	QTest::addColumn<bool>("expected");
 	
 	node *parent, *current;//временные переменные для заполнения таблицы
 	variant temp;
 
 	temp.form = "g";
+	temp.type = temp.type | operand_s;
 	parent = tree_alt_form();
 	current = parent->child(0);
-	QTest::newRow("form accept") << parent << current << temp << true;
+	QTest::newRow("form accept") << parent << current << temp << QString("g") << true;
 
+	temp=variant();
 	temp.form = "g";
+	temp.type = temp.type | oor;
 	parent = tree_alt_pattern2();
 	current = parent->child(0);
-	QTest::newRow("form dont accept") << parent << current << temp << false;
+	QTest::newRow("form dont accept") << parent << current << temp << QString() << false;
 
+	temp=variant();
+	temp.type = temp.type | oor;
 	temp.childiType[0] = oor;
 	parent = 0;
 	current = tree_alt_pattern3();
-	QTest::newRow("variant accept") << parent << current << temp << true;
+	QTest::newRow("variant accept") << parent << current << temp << QString() << true;
 
-	temp.childiType[0] = oor;
+	temp=variant();
+	temp.type = temp.type | oor;
+	temp.childiType[1] = oor;
 	parent = 0;
 	current = tree_alt_pattern2();
-	QTest::newRow("variant dont accept") << parent << current << temp << false;
+	QTest::newRow("variant dont accept") << parent << current << temp << QString() << false;
 }	
 
 void tests::checkTest()
@@ -199,9 +223,10 @@ void tests::checkTest()
 	QFETCH(node*,parent);
 	QFETCH(node*,current);
 	QFETCH(variant,pattern);
+	QFETCH(QString,form);
     QFETCH(bool,expected);
 
-	bool result = current->check(pattern,parent);
+	bool result = current->check(pattern,parent,form);
 	if(parent==0)
 		delete current;
 	else
@@ -257,9 +282,12 @@ void tests::postprocessingTest()
 	QFETCH(QString,str);
 	QFETCH(QString,expected);
 	
-	//printf("\nExpected: %s\n",qPrintable(QString(expected)));
-	//printf("Returned: %s\n",qPrintable(QString(str)));
-	QCOMPARE(str,expected);
+	if(str!=expected)
+	{
+		printf("\nExpected: %s\n",qPrintable(QString(expected)));
+		printf("str: %s\n",qPrintable(QString(str)));	
+		QFAIL("str != expected");
+	}
 }
 
 void tests::initTestCase()

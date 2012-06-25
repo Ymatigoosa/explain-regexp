@@ -39,7 +39,7 @@ public:
 	 * \param[in] type требуемый тип узла
 	 * \return список шаблонов из контейнера nodePatterns
 	 */
-	nodePattern getPatternFromType(nodeType type);
+	nodePattern getPatternFromType(nodeType type) const;
 };
 
 #endif // PATTERNCONTAINER_H
