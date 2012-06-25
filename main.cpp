@@ -27,6 +27,8 @@
 #include <QMap>
 #include <QTextCodec>
 #include <clocale>
+#include <conio.h>
+#include <QStringList>
 
 //тег,тип,атрибут1,атрибут2;
 //"kmn",quantifier_mn,"m","n";
@@ -618,6 +620,22 @@ void postprocessing(QString & str)
 	str.replace(QRegExp(" +")," ");
 }
 
+/*!
+ *\brief сохраняет строку в файл
+ *Сохраняет строку content в файл filename
+ *\param[in] filename имя файла
+ *\param[in] content сохраняемый текст
+ */
+bool saveToTXT(QString &filename,QString &content)
+{
+	QFile file(filename);
+	if (!file.open(QIODevice::WriteOnly))	//проверка
+		throw QString("output-file open errror");			//выходим при ошибке
+	QTextStream out(&file);
+	out.setCodec("UTF-8");
+	out << content;
+	file.close();
+}
 
 int main(int argc, char *argv[])
 {
@@ -633,16 +651,28 @@ int main(int argc, char *argv[])
 	{
 		//запуск тестов
 		tests t1;
-		QTest::qExec(&t1);
-		node * tree1 = readTree("tree1.xml");
-		puts( qPrintable(QString("русский текст")));
-		qDebug("%s",qPrintable(QString("русский текст")));
-		//qDebug("%s",dfsdf);
+		if(!QTest::qExec(&t1))
+			_getch();
+		
+		//программа
+		QStringList argList = a.arguments();
+		QString result;
+		if(argc<3)
+			throw QString("program.exe <input file> <output file> [n]");
+		int num=-1;//счетчик нумерации
+		if(argc==4 && argList.last()=="n")
+			num=0;
+		node * root = readTree(argList[1]);//корень дерева
+		patternContainer *patterns = readPatterns(QString("patterns.xml"));//список шаблонов
+		result = root->description(*patterns,num);//получили описание
+		postprocessing(result);
+		saveToTXT(argList[2],result);
 	}
 	catch(const QString &s)
 	{
 		qDebug("EXEPTION: %s!",qPrintable(s)); 
+		_getch();
 	}
 
-    return a.exec();
+    return 0;
 }
