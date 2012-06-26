@@ -626,7 +626,7 @@ void postprocessing(QString & str)
  *\param[in] filename имя файла
  *\param[in] content сохраняемый текст
  */
-bool saveToTXT(QString &filename,QString &content)
+void saveToTXT(QString &filename,QString &content)
 {
 	QFile file(filename);
 	if (!file.open(QIODevice::WriteOnly))	//проверка
@@ -651,8 +651,9 @@ int main(int argc, char *argv[])
 	{
 		//запуск тестов
 		tests t1;
-		if(!QTest::qExec(&t1))
-			_getch();
+		//if(!QTest::qExec(&t1))
+			//_getch();
+		QTest::qExec(&t1);
 		
 		//программа
 		QStringList argList = a.arguments();

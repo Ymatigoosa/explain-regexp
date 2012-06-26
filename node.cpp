@@ -29,10 +29,13 @@ node * node::child(int n)
 QString node::description(const patternContainer & patterns, int num, node * parent, QString form)
 {
 	QString current_pattern = this->pattern(patterns.getPatternFromType(this->type()),parent,form);
-	QRegExp findDollar("\\$(1|2|3|m|n|text|start|end)(\\w*)");//регулярные выражения для поиска мест подставления шаблонов ( вроде $1g )
+	QRegExp findDollar("\\$(1|2|3|m|n|text|start|end|X)(\\w*)");//регулярные выражения для поиска мест подставления шаблонов ( вроде $1g )
 	QString _captured_type,_captured_form;//подстроки захваченные регулярным выражением
 	QString insert;//строка которую вставляем
 	static int new_num;	//номер для подстановки в следующий узел
+	static int mask_count=1;//счетчик масок
+	if(parent==NULL)
+		mask_count=1;//первый заход в функцию, сбрасываем счетчик
 	new_num=(num<0) ? (num-1) : (num+1);//если номер отрицателен, ведем подсчет но в отрицательных значениях
 	int pos = findDollar.indexIn(current_pattern);//позиция найденной подстроки
 	while(pos > -1)//пока есть такие конструкции
@@ -89,6 +92,10 @@ QString node::description(const patternContainer & patterns, int num, node * par
 			if(!this->hasArg("end"))
 				throw QString("node <%1> has no 'end' argument (node number: %2)").arg(this->tagName()).arg( num<0 ? ~new_num : new_num);
 			insert = this->n;//атрибут end хранится в поле n
+		}
+		else if	(_captured_type=="X")		
+		{
+			insert = QString::number(mask_count++);//счетчик масок
 		}
 
 		current_pattern = current_pattern.arg(insert);
