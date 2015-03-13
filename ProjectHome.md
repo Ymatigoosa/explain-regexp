@@ -1,0 +1,1 @@
+The program for description of regular expressions designed to automatic compilation of descriptions according to the parse tree of the regular expression.
